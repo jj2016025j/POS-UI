@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <div class="function">
+            <div class="title-group">
+                <div class="title">查看訂單 VIEW</div>
+                <input class="search" type="text" value="搜尋 SEARCH...">
+            </div>
+        </div>
+        <div class="order-group">
+            <div class="order-info">
+                <div class="orderid">
+                    <h5>訂單編號:A123456789</h5>
+                    <p>2024-04-12 18:54:06</p>
+                </div>
+                <p>桌號:12</p>
+                <div class="subtotal">
+                    <p>SUBTOTAL</p>
+                    <p>$560</p>
+                </div>
+                <div class="tax">
+                    <p>TAX</p>
+                    <p>$56</p>
+                </div>
+                <div class="total">
+                    <p>TOTAL</p>
+                    <p>$616</p>
+                </div>
+                <a href="comfirm.html">前往結帳</a>
+            </div>
+            <div class="function-group">
+                <a href="order.html">繼續點餐</a>
+                <input type="button" value="編輯訂單">
+                <input type="button" value="儲存變更">
+            </div>
+        </div>
+        <ul class="suborders">
+            <li class="suborder">
+                <input type="button" value="edit">
+                <input type="button" value="delete">
+                <div class="suborderid">
+                    <p>子訂單編號:A123456789-1</p>
+                </div>
+                <div class="suborder-time">2024-04-12 18:54:06</div>
+                <ul class="meals">
+                    <hr>
+                    <li class="meal">
+                        <h1 class="meal-image">圖</h1>
+                        <div class="meal-info">
+                            <h1 class="meal-title">五花肉</h1>
+                            <div>
+                                <p>1</p>
+                                <p>編輯</p>
+                                <p>$150</p>
+                            </div>
+                        </div>
+                    </li>
+                    <hr>
+                </ul>
+
+                <div class="subordertotal">
+                    <p>SUBTOTAL</p>
+                    <p>$560</p>
+                </div>
+            </li>
+        </ul>
+    </section>
+</body>
+
+</html>
