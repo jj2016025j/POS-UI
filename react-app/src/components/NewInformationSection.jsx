@@ -1,5 +1,5 @@
 import React from 'react';
-import activityImage from './image/廣告/活動3.png'; // 確保路徑正確
+import activityImage from '../image/廣告/活動3.png'; // 確保路徑正確
 
 function NewInformationSection() {
     return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import Order from '../components/pos/Order';
-import Report from '../components/pos/Report';
-import Edit from '../components/pos/Edit';
+import Order from '../page/Order';
+import Report from '../page/Report';
+import Edit from '../page/Edit';
 // 其他導入...
 
 function Pos() {

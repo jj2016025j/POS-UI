@@ -1,7 +1,7 @@
 import React from 'react';
 import sectionImg from '../image/首頁大圖1.jpg'; // 確保路徑正確
 
-function SectionImg() {
+function Card() {
     return (
         <div className="sectionImg">
             <img src={sectionImg} className="img2" alt="" />
@@ -9,4 +9,4 @@ function SectionImg() {
     );
 }
 
-export default SectionImg;
+export default Card;

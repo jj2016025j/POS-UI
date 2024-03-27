@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import Home from '../components/web/Home';
-import About from '../components/web/About';
-import Contact from '../components/web/Contact';
-import News from '../components/web/News';
+import Home from '../page/Home';
+import About from '../page/About';
+import Contact from '../page/Contact';
+import News from '../page/News';
 // 其他導入...
 
 function Web() {

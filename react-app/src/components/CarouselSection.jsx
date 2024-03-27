@@ -1,7 +1,7 @@
 import React from 'react';
-import slide1 from './image/廣告/未命名-1.png'; // 確保路徑正確
-import slide2 from './image/廣告/未命名-2.png';
-import slide3 from './image/廣告/未命名-3.png';
+import slide1 from '../image/廣告/未命名-1.png'; // 確保路徑正確
+import slide2 from '../image/廣告/未命名-2.png';
+import slide3 from '../image/廣告/未命名-3.png';
 
 function CarouselSection() {
     return (

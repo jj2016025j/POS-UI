@@ -1,7 +1,8 @@
 import React from 'react';
-import cardImg1 from './image/info1.jpg'; // 確保路徑正確
-import cardImg2 from './image/info2.jpeg';
-import cardImg3 from './image/info4.jpg';
+import cardImg1 from '../image/info1.jpg'; // 確保路徑正確
+import cardImg2 from '../image/info2.jpeg';
+import cardImg3 from '../image/info4.jpg';
+import Card from './Card';
 
 function FeatureSection() {
     return (
