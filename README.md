@@ -1,2 +1,0 @@
-# Nodejs-POS-UI
- 

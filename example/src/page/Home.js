@@ -1,6 +1,6 @@
 import React from 'react';
-import HomeCover from './HomeCover';
-import DisplayArea from './DisplayArea';
+import HomeCover from '../../../my-app/src/components/HomeCover';
+import DisplayArea from '../../../my-app/src/components/DisplayArea';
 
 function Home() {
   return (
