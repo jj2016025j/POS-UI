@@ -1,18 +1,17 @@
 import React from 'react';
-import CarouselSection from '../components/CarouselSection';
-import FeatureSection from '../components/FeatureSection';
-import NewInformationSection from '../components/NewInformationSection';
-import SectionImg from '../components/SectionImg';
-
+import { useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Order() {
+    let { trade_no } = useParams();
+    {/* 取得後端 */ }
+
     return (
-        <React.Fragment>
-            <CarouselSection />
-            <FeatureSection />
-            <NewInformationSection />
-            <SectionImg />
-        </React.Fragment >
+        <div>
+            <h1>Order</h1>
+            <p>Trade Number: {trade_no}</p>
+            <NavLink className="nav-link active" aria-current="page" to={`/pos/confirmpayment/${trade_no}`}><b>付款頁面</b></NavLink>
+        </div>
     );
 }
 

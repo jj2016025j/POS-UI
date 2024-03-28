@@ -1,17 +1,9 @@
 import React from 'react';
-import CarouselSection from '../components/CarouselSection';
-import FeatureSection from '../components/FeatureSection';
-import NewInformationSection from '../components/NewInformationSection';
-import SectionImg from '../components/SectionImg';
-
 
 function Report() {
     return (
         <React.Fragment>
-            <CarouselSection />
-            <FeatureSection />
-            <NewInformationSection />
-            <SectionImg />
+            <h1>Report</h1>
         </React.Fragment >
     );
 }
