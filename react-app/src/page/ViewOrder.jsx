@@ -31,34 +31,26 @@ import axios from 'axios';
 function ViewOrder() {
   const { mainOrderId } = useParams();
   const history = useHistory();
-  const [orderDetails, setOrderDetails] = useState(null);
+  const [orderDetails, setOrderDetails] = useState({mainOrder: null, subOrders: []});
 
   useEffect(() => {
-    // 假设后端API端点为 /api/orders/details/:mainOrderId
     axios.get(`/order/getMainAndSubOrder/${mainOrderId}`)
       .then(response => {
-        // 假设响应的数据结构是 { mainOrder: {...}, subOrders: [{...}, {...}], ... }
-        setOrderDetails(response.data);
+        // 确保响应中包含mainOrder和subOrders，如果没有则设置为null或空数组
+        setOrderDetails({
+          mainOrder: response.data.mainOrder || null, 
+          subOrders: response.data.subOrders || []
+        });
       })
       .catch(error => {
         console.error("Error fetching order details:", error);
+        setOrderDetails({mainOrder: null, subOrders: []}); // 请求失败或找不到订单时的处理
       });
   }, [mainOrderId]);
 
-  const goToCheckout = () => {
-    history.push(`/checkout/${mainOrderId}`);
-  };
+  const goToCheckout = () => history.push(`/checkout/${mainOrderId}`);
+  const goToOrderPage = () => history.push(`/order/${mainOrderId}`);
 
-  const goToOrderPage = () => {
-    history.push(`/order/${mainOrderId}`);
-  };
-
-  if (!orderDetails) {
-    return <React.Fragment>
-      <h1>查看訂單 VIEW ORDER</h1>
-      <div>Loading...</div>;
-    </React.Fragment>
-  }
   const handleEditSubOrder = (subOrderId) => {
     // 编辑子订单的逻辑
   };
@@ -66,6 +58,17 @@ function ViewOrder() {
   const handleDeleteSubOrder = (subOrderId) => {
     // 删除子订单的逻辑
   };
+
+  // 如果没有找到订单（mainOrder为null）
+  if (!orderDetails.mainOrder) {
+    return (
+      <React.Fragment>
+        <h1>查看訂單 VIEW ORDER</h1>
+        <div>Order Not Found</div>
+      </React.Fragment>
+    );
+  }
+
   return (
     <div>
       <h1>查看訂單 VIEW ORDER</h1>
@@ -79,6 +82,7 @@ function ViewOrder() {
         <p>Total: ${orderDetails.mainOrder.Total}</p>
         <button onClick={goToCheckout}>前往結帳</button>
         <button onClick={goToOrderPage}>前往點餐</button>
+        <button onClick={goToOrderPage}>取消此訂單</button>
       </div>
       <div>
         <h2>Sub Orders</h2>

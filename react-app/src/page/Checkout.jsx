@@ -31,7 +31,7 @@ function Confirmpayment() {
 
   useEffect(() => {
     // 假设的API请求URL，请根据实际情况调整
-    axios.get(`/api/orders/${mainOrderId}`)
+    axios.get(`/order/getMainOrder/${mainOrderId}`)
       .then(response => {
         setOrderDetails(response.data);
       })
@@ -89,6 +89,8 @@ function Confirmpayment() {
           <p>Trade Number: {mainOrderId}</p>
           <p>桌号: {orderDetails.TableId}</p>
           <p>创建时间: {new Date(orderDetails.CreateTime).toLocaleString()}</p>
+          <p>訂單加總: ${orderDetails.SubTotal}</p>
+          <p>小費: ${orderDetails.ServiceFee}</p>
           <p>总金额: ${orderDetails.Total}</p>
           {/* 其他详情 */}
         </>
