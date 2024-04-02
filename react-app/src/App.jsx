@@ -14,7 +14,7 @@ import OrderHistory from './page/OrderHistory';
 import RoleManagement from './page/RoleManagement';
 import Settings from './page/Settings';
 
-import PosNav from './components/PosNav';
+import Nav from './components/Nav';
 import Error from './page/Error';
 import Header from './components/Header';
 
@@ -25,7 +25,7 @@ function App() {
         <CartProvider>
             <BrowserRouter>
                 <Header />
-                <PosNav />
+                <Nav />
                 <Switch>
                     <Redirect exact from={`/`} to={`/pos`} />
                     <Route exact path={`/pos`} component={PosHome} />
@@ -39,8 +39,8 @@ function App() {
                     <Route path={`/orderhistory`} component={OrderHistory} />
                     <Route path={`/editMenuItem`} component={Edit} />
                     <Route path={`/report`} component={Report} />
-                    <Route path="/pos/role" component={RoleManagement} />
-                    <Route path="/pos/setting" component={Settings} />
+                    <Route path="/role" component={RoleManagement} />
+                    <Route path="/setting" component={Settings} />
                     <Route component={Error} />
                 </Switch>
             </BrowserRouter>
