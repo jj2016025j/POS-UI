@@ -45,18 +45,16 @@ function TablesStatus() {
         <div className='tables'>
             {tables.map(table => (
                 <ul className='table' key={table.Id}>
-                    <li>{table.TableNumber}</li>
+                    <li>{table.TableNumber}桌</li>
                     <li>{table.TablesStatus}</li>
-                    <li>
-                        {table.TablesStatus !== "空桌" && table.TablesStatus !== "清潔中" && (
-                            <>
-                                <button onClick={() => handleOrder(table.TableNumber)}>点餐</button>
-                                <button onClick={() => handleViewOrder(table.TableNumber)}>查看订单</button>
-                                <button onClick={() => handleCheckout(table.TableNumber)}>结帐</button>
-                                <button onClick={() => handlePrintQRCode(table.TableNumber)}>列印点餐QR码</button>
-                            </>
-                        )}
-                    </li>
+                    {table.TablesStatus !== "空桌" && table.TablesStatus !== "清潔中" && (
+                        <React.Fragment>
+                            <li><buttom onClick={() => handleOrder(table.TableNumber)}>点餐</buttom></li>
+                            <li><buttom onClick={() => handleViewOrder(table.TableNumber)}>查看订单</buttom></li>
+                            <li><buttom onClick={() => handleCheckout(table.TableNumber)}>结帐</buttom></li>
+                            <li><buttom onClick={() => handlePrintQRCode(table.TableNumber)}>列印点餐QR码</buttom></li>
+                        </React.Fragment>
+                    )}
                 </ul>
             ))}
         </div>
