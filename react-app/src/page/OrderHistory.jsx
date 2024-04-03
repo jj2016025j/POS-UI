@@ -30,25 +30,25 @@ function OrderHistory() {
   };
 
   return (
-    <div className='section'>
+    <React.Fragment>
       <h1>訂單歷史 HISTORY</h1>
-      <div className='overflow-y'>
-        <ul>
+      <div className='function'>
+        <ul className='tables'>
           {orders.map(order => (
             <li className='history-order' key={order.MainOrderId} onClick={() => handleOrderClick(order.MainOrderId)}>
               <div className='history-order-id-table-num'>
-                <h4>訂單編號 : {order.MainOrderId} </h4>
-                <h6>桌號 : {order.TableId}</h6>
+                <p>訂單編號 : {order.MainOrderId} </p>
+                <p>桌號 : {order.TableId}</p>
               </div>
               <div className='history-order-time-Total'>
                 <p>{new Date(order.CreateTime).toLocaleString()}</p>
-                <h3>總金額 : ${order.Total}</h3>
+                <p>總金額 : ${order.Total}</p>
               </div>
             </li>
           ))}
         </ul>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 

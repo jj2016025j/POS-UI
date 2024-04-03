@@ -10,7 +10,7 @@ body {
     overflow: hidden;
     color: #000;
     /* text-align: center; */
-    font-family: Caveat;
+    font-family: "Segoe UI";
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -40,15 +40,19 @@ nav {
     align-self: stretch;
 }
 
-nav ul {
+ul {
+    list-style-type: none;
+}
+
+/* nav ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
     align-self: stretch;
-}
+} */
 
-nav li {
+/* nav li {
     display: flex;
     height: 100px;
     padding: 10px 0px;
@@ -57,31 +61,10 @@ nav li {
     align-items: center;
     gap: 10px;
     align-self: stretch;
-}
+} */
 
-li h1 {
-    color: #000;
-    text-align: center;
-    font-family: Caveat;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-transform: uppercase;
-}
 
-li p {
-    color: #000;
-    text-align: center;
-    font-family: Caveat;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
-}
-
-.setting {
+/* .setting {
     display: flex;
     padding: 20px 30px;
     flex-direction: column;
@@ -90,22 +73,25 @@ li p {
     gap: 10px;
     border-radius: 20px;
     background: #F2EBDF;
-}
+} */
 
 section {
     display: flex;
+    padding: 30px;
     flex-direction: column;
     align-items: flex-start;
     flex: 1 0 0;
+    gap: 30px;
     align-self: stretch;
     height: 100vh;
-    overflow: auto;
-
 }
 
-.overflow-y {
-    overflow-y:auto;
-    height: 100%;
+.title-group {
+    display: flex;
+    padding: 0px 0px;
+    align-items: center;
+    gap: 30px;
+    align-self: stretch;
 }
 
 .function {
@@ -114,39 +100,13 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    align-content: flex-start;
     gap: 30px;
     align-self: stretch;
-}
-
-.title-group {
-    display: flex;
-    padding: 10px 0px;
-    align-items: center;
-    gap: 30px;
-    align-self: stretch;
-}
-
-.title,
-h1 {
-    flex: 1 0 0;
-    color: #000;
-    font-family: "Segoe UI";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-transform: uppercase;
-}
-
-.search {
-    display: flex;
-    padding: 10px 20px;
-    align-items: center;
-    gap: 10px;
-    flex: 1 0 0;
-    align-self: stretch;
-    border-radius: 30px;
-    background: #FFF;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
 }
 
 .tables {
@@ -162,7 +122,7 @@ h1 {
 .table {
     display: flex;
     width: 150px;
-    height: 200px;
+    /* height: 200px; */
     padding: 10px;
     flex-direction: column;
     align-items: center;
@@ -174,32 +134,16 @@ h1 {
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.25);
 }
 
-.table p {
-    color: #000;
-    text-align: center;
-    font-family: "Segoe UI";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-transform: uppercase;
-}
-
-ul {
-    list-style-type: none;
-}
-
 .history-order {
     display: flex;
-    width: 544px;
-    height: 120px;
-    padding: 20px;
+    width: 350px;
+    /* height: 80px; */
+    padding: 10px;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     border-radius: 20px;
     background: #FFF;
-
     /* 預設陰影 */
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.25);
 }
@@ -217,3 +161,60 @@ ul {
     align-items: center;
     align-self: stretch;
 }
+
+.title,
+h1 {
+    flex: 1 0 0;
+    color: #000;
+    font-family: "Segoe UI";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+li h1 {
+    color: #000;
+    text-align: center;
+    font-family: "Segoe UI";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+li p {
+    color: #000;
+    text-align: center;
+    font-family: "Segoe UI";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+/* .table p {
+    color: #000;
+    text-align: center;
+    font-family: "Segoe UI";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+} */
+
+
+/* .search {
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 30px;
+    background: #FFF;
+} */

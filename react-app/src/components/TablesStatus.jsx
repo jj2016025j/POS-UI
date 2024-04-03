@@ -45,7 +45,7 @@ function TablesStatus() {
         } else {
             console.log("Print cancelled");
         }
-    };    
+    };
 
     const handleCleanCompleted = (TableNumber) => {
         axios.post(`/order/clean-table`, { TableNumber, TablesStatus: '空桌' })
@@ -71,12 +71,12 @@ function TablesStatus() {
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <li onClick={() => handleOrder(table.MainOrderId)}>前往點餐</li>
-                            <li onClick={() => handleViewOrder(table.MainOrderId)}>查看訂單</li>
-                            <li onClick={() => handleCheckout(table.MainOrderId)}>結帳</li>
-                            <li onClick={() => handlePrintQRCode(table.MainOrderId, table.TableNumber)}>列印點餐QRCODE</li>
+                            <li><button onClick={() => handleOrder(table.MainOrderId)}>前往點餐</button></li>
                         </React.Fragment>
                     )}
+                    <li><button onClick={() => handleViewOrder(table.MainOrderId)} disabled={!table.MainOrderId}>查看訂單</button></li>
+                    <li><button onClick={() => handleCheckout(table.MainOrderId)} disabled={!table.MainOrderId}>結帳</button></li>
+                    <li><button onClick={() => handlePrintQRCode(table.MainOrderId, table.TableNumber)} disabled={!table.MainOrderId}>列印點餐QRCODE</button></li>
                 </ul>
             ))}
         </div>
