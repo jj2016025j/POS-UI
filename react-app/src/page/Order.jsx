@@ -11,7 +11,6 @@ function Menu() {
     const categoryRefs = useRef({});
 
     useEffect(() => {
-        // 假设通过axios从后端获取菜单数据
         axios.get('http://localhost:8080/menu')
             .then(response => {
                 setMenuData(response.data);

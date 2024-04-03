@@ -1,6 +1,5 @@
 // MenuItem.js
 import React, { useState } from 'react';
-import { useCart } from '../contexts/CartContext';
 
 function MenuItem({ item, onAddToCart }) {
     const [quantity, setQuantity] = useState(0);

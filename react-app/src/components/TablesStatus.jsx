@@ -7,7 +7,7 @@ function TablesStatus() {
     const [tables, setTables] = useState([]);
     let history = useHistory();
     const { updateTableNumber, updateMainOrderId } = useCart();
-    
+
     useEffect(() => {
         axios.get('/order')
             .then(response => setTables(response.data))
@@ -39,38 +39,26 @@ function TablesStatus() {
             // 用户点击了"否"，不执行任何操作
             console.log("Print cancelled");
         }
-    };    
+    };
 
     return (
-        <div>
-            <h2>Tables Status</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Table Number</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tables.map(table => (
-                        <tr key={table.Id}>
-                            <td>{table.TableNumber}</td>
-                            <td>{table.TablesStatus}</td>
-                            <td>
-                                {table.TablesStatus !== "空桌" && table.TablesStatus !== "清潔中" && (
-                                    <>
-                                        <button onClick={() => handleOrder(table.TableNumber)}>点餐</button>
-                                        <button onClick={() => handleViewOrder(table.TableNumber)}>查看订单</button>
-                                        <button onClick={() => handleCheckout(table.TableNumber)}>结帐</button>
-                                        <button onClick={() => handlePrintQRCode(table.TableNumber)}>列印点餐QR码</button>
-                                    </>
-                                )}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className='tables'>
+            {tables.map(table => (
+                <ul className='table' key={table.Id}>
+                    <li>{table.TableNumber}</li>
+                    <li>{table.TablesStatus}</li>
+                    <li>
+                        {table.TablesStatus !== "空桌" && table.TablesStatus !== "清潔中" && (
+                            <>
+                                <button onClick={() => handleOrder(table.TableNumber)}>点餐</button>
+                                <button onClick={() => handleViewOrder(table.TableNumber)}>查看订单</button>
+                                <button onClick={() => handleCheckout(table.TableNumber)}>结帐</button>
+                                <button onClick={() => handlePrintQRCode(table.TableNumber)}>列印点餐QR码</button>
+                            </>
+                        )}
+                    </li>
+                </ul>
+            ))}
         </div>
     );
 }
