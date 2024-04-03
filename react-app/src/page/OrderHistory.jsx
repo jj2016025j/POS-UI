@@ -17,7 +17,7 @@ function OrderHistory() {
   useEffect(() => {
     axios.get('/order/getrecentorders')
       .then(response => {
-        setOrders(response.data); 
+        setOrders(response.data);
       })
       .catch(error => {
         console.error('Error fetching order history:', error);
@@ -30,15 +30,24 @@ function OrderHistory() {
   };
 
   return (
-    <div>
-      <h1>订单历史 History</h1>
-      <ul>
-        {orders.map(order => (
-          <li key={order.MainOrderId} onClick={() => handleOrderClick(order.MainOrderId)}>
-            订单编号: {order.MainOrderId}, 桌号: {order.TableId}, 创建时间: {new Date(order.CreateTime).toLocaleString()}, 总金额: ${order.Total}
-          </li>
-        ))}
-      </ul>
+    <div className='section'>
+      <h1>訂單歷史 HISTORY</h1>
+      <div className='overflow-y'>
+        <ul>
+          {orders.map(order => (
+            <li className='history-order' key={order.MainOrderId} onClick={() => handleOrderClick(order.MainOrderId)}>
+              <div className='history-order-id-table-num'>
+                <h4>訂單編號 : {order.MainOrderId} </h4>
+                <h6>桌號 : {order.TableId}</h6>
+              </div>
+              <div className='history-order-time-Total'>
+                <p>{new Date(order.CreateTime).toLocaleString()}</p>
+                <h3>總金額 : ${order.Total}</h3>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

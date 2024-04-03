@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { useCart } from '../contexts/CartContext';
 
 function TablesStatus() {
     const [tables, setTables] = useState([]);
     let history = useHistory();
-    const { updateTableNumber, updateMainOrderId } = useCart();
 
     useEffect(() => {
-        axios.get('/order')
+        axios.get('/order/getAllMainOrder')
             .then(response => setTables(response.data))
             .catch(error => console.error('Error fetching tables status:', error));
     }, []);
 
     const handleOrder = (mainOrderId) => {
         history.push(`/order/${mainOrderId}`);
+    };
+
+    const handleNewOrder = (TableNumber) => {
+        axios.post(`/order/new-order`, { TableNumber })
+            .then(response => {
+                const updatedTableInfo = response.data;
+                setTables(tables => tables.map(table =>
+                    table.TableNumber === TableNumber ? { ...table, ...updatedTableInfo } : table
+                ));
+            })
+            .catch(error => console.error('Error creating new order:', error));
     };
 
     const handleViewOrder = (mainOrderId) => {
@@ -26,33 +35,46 @@ function TablesStatus() {
         history.push(`/checkout/${mainOrderId}`);
     };
 
-    const handlePrintQRCode = (tableNumber) => {
-        console.log(`Print QR Code for table ${tableNumber}`);
+    const handlePrintQRCode = (MainOrderId, TableNumber) => {
+        console.log(`Preparing to send print request for table ${TableNumber}`);
         const isConfirmed = window.confirm("确定再次列印吗？");
         if (isConfirmed) {
-            console.log(`Sending print request for table ${tableNumber}`);
-            // 实现发送打印请求的逻辑
-            // 要打印的是桌號還是訂單ID的QRCODE
-            // sendPrintRequest(mainOrderId); 
-            // sendPrintRequest(tableNumber); 
+            axios.post('/order/printQRcode', { MainOrderId, TableNumber })
+                .then(response => alert(response.data.message))
+                .catch(error => console.error('Error on print request:', error));
         } else {
-            // 用户点击了"否"，不执行任何操作
             console.log("Print cancelled");
         }
+    };    
+
+    const handleCleanCompleted = (TableNumber) => {
+        axios.post(`/order/clean-table`, { TableNumber, TablesStatus: '空桌' })
+            .then(response => {
+                const updatedTableInfo = response.data;
+                setTables(tables => tables.map(table =>
+                    table.TableNumber === TableNumber ? { ...table, ...updatedTableInfo } : table
+                ));
+            })
+            .catch(error => console.error('Error updating table status:', error));
     };
 
     return (
         <div className='tables'>
             {tables.map(table => (
                 <ul className='table' key={table.Id}>
-                    <li>{table.TableNumber}桌</li>
-                    <li>{table.TablesStatus}</li>
-                    {table.TablesStatus !== "空桌" && table.TablesStatus !== "清潔中" && (
+                    <li>{table.TableNumber}桌 {table.TablesStatus}</li>
+                    {table.TablesStatus === "空桌" ? (
+                        <li><button onClick={() => handleNewOrder(table.TableNumber)}>建立新訂單</button></li>
+                    ) : table.TablesStatus === "清潔中" ? (
                         <React.Fragment>
-                            <li><buttom onClick={() => handleOrder(table.TableNumber)}>点餐</buttom></li>
-                            <li><buttom onClick={() => handleViewOrder(table.TableNumber)}>查看订单</buttom></li>
-                            <li><buttom onClick={() => handleCheckout(table.TableNumber)}>结帐</buttom></li>
-                            <li><buttom onClick={() => handlePrintQRCode(table.TableNumber)}>列印点餐QR码</buttom></li>
+                            <li><button onClick={() => handleCleanCompleted(table.TableNumber)}>清潔完畢</button></li>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <li onClick={() => handleOrder(table.MainOrderId)}>前往點餐</li>
+                            <li onClick={() => handleViewOrder(table.MainOrderId)}>查看訂單</li>
+                            <li onClick={() => handleCheckout(table.MainOrderId)}>結帳</li>
+                            <li onClick={() => handlePrintQRCode(table.MainOrderId, table.TableNumber)}>列印點餐QRCODE</li>
                         </React.Fragment>
                     )}
                 </ul>
