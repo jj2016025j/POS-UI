@@ -83,7 +83,6 @@ function Confirmpayment() {
 
   return (
     <div>
-      <h1>結帳 CHECKOUT</h1>
       {orderDetails && (
         <>
           <p>Trade Number: {mainOrderId}</p>

@@ -5,7 +5,6 @@ import LastMonthData from '../components/LastMonthData';
 function Report() {
     return (
         <React.Fragment>
-            <h1>Report</h1>
             <AllData />
             <hr />
             <LastMonthData />

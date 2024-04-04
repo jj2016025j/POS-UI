@@ -55,7 +55,6 @@ function ItemEdit() {
 
     return (
         <div>
-            <h1>品项编辑 EDIT</h1>
             <button onClick={handleAddNewItem}>新增品项</button>
 
             {menuData.categories && Array.isArray(menuData.categories) && menuData.categories.map(category => (
@@ -68,43 +67,6 @@ function ItemEdit() {
                     ))}
                 </div>
             ))}
-            {editingItem && (
-                <div>
-                    <h2>编辑菜单项</h2>
-                    <img src={editingItem.image_url} alt={editingItem.MenuItemName} style={{ width: '100px', height: '100px' }} />
-
-                    <input
-                        type="text"
-                        name="image_url"
-                        value={editingItem.image_url}
-                        placeholder="图片URL"
-                    />
-                    <input
-                        type="text"
-                        name="MenuItemName"
-                        value={editingItem.MenuItemName}
-                        placeholder="品项名称"
-                    />
-                    <input
-                        type="number"
-                        name="Price"
-                        value={editingItem.Price}
-                        placeholder="价格"
-                    />
-                    <select
-                        name="CategoryId"
-                        value={editingItem.CategoryId}
-                    >
-                        {menuData.categories.map(category => (
-                            <option key={category.Id} value={category.Id}>
-                                {category.CategoryName}
-                            </option>
-                        ))}
-                    </select>
-                    <button onClick={handleSave}>保存</button>
-                    <button onClick={handleDelete}>刪除</button>
-                </div>
-            )}
         </div>
     );
 }

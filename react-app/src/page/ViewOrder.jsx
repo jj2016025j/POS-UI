@@ -71,7 +71,6 @@ function ViewOrder() {
 
   return (
     <div>
-      <h1>查看訂單 VIEW ORDER</h1>
       <div>
         <h2>Main Order</h2>
         <p>Order Number: {orderDetails.mainOrder.MainOrderId}</p>

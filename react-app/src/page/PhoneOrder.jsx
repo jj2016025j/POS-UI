@@ -7,7 +7,6 @@ function Phone() {
 
   return (
     <div>
-      <h1>Order</h1>
       <p>Trade Number: {trade_no}</p>
     </div>
   );

@@ -10,7 +10,9 @@ import './app.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <div className="myBody">
+      <App />
+    </div>
   </React.StrictMode>
 );
 

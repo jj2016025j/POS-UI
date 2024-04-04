@@ -13,7 +13,9 @@ function Header({ title }) {
         rel="stylesheet"
       />
       <link rel="stylesheet" href="/css/page.css" /> */}
-      <script src="https://unpkg.com/scrollreveal"></script>
+      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-bold-straight/css/uicons-bold-straight.css'>
+        {/**for icon https://www.flaticon.com/uicons/get-started*/}
+      </link><script src="https://unpkg.com/scrollreveal"></script>
     </React.Fragment >
   );
 }

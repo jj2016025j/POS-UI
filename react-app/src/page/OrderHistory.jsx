@@ -31,9 +31,8 @@ function OrderHistory() {
 
   return (
     <React.Fragment>
-      <h1>訂單歷史 HISTORY</h1>
       <div className='function'>
-        <ul className='tables'>
+        <div className='arrange-areas-horizontally'>
           {orders.map(order => (
             <li className='history-order' key={order.MainOrderId} onClick={() => handleOrderClick(order.MainOrderId)}>
               <div className='history-order-id-table-num'>
@@ -46,7 +45,7 @@ function OrderHistory() {
               </div>
             </li>
           ))}
-        </ul>
+        </div>
       </div>
     </React.Fragment>
   );

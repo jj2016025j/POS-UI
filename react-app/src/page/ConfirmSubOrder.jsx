@@ -37,7 +37,6 @@ function ConfirmSubOrder() {
 
   return (
     <div>
-      <h1>确认订单 CONFIRM</h1>
       {/* <p>桌号: {tableNumber}</p> */}
       {itemsForCurrentTable.map((item, index) => (
         <div key={index}>
