@@ -32,14 +32,14 @@ function OrderHistory() {
   return (
     <React.Fragment>
       <div className='function'>
-        <div className='arrange-areas-horizontally'>
+        <div className='horizontally'>
           {orders.map(order => (
             <li className='history-order' key={order.MainOrderId} onClick={() => handleOrderClick(order.MainOrderId)}>
-              <div className='history-order-id-table-num'>
+              <div className='text-space-between'>
                 <p>訂單編號 : {order.MainOrderId} </p>
                 <p>桌號 : {order.TableId}</p>
               </div>
-              <div className='history-order-time-Total'>
+              <div className='text-space-between'>
                 <p>{new Date(order.CreateTime).toLocaleString()}</p>
                 <p>總金額 : ${order.Total}</p>
               </div>

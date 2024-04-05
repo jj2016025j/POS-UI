@@ -59,13 +59,13 @@ function Menu() {
                 ))}
             </div>
             <div className='function'>
-                <div className='arrange-areas-horizontally'>
+                <div className='vertically'>
                     {menuData.categories.map(category => (
-                        <div key={category.Id} className='arrange-areas-vertically'>
+                        <div key={category.Id} className='vertically'>
                             <CategoryTitle title={category.CategoryName} />
-                            <div className='arrange-areas-horizontally'>
+                            <div className='horizontally'>
                                 {menuData.menuItems.filter(item => item.CategoryId === category.Id).map(item => (
-                                    <MenuItem className="table" key={item.Id} item={item} onAddToCart={handleAddToCart} />
+                                    <MenuItem key={item.Id} item={item} onAddToCart={handleAddToCart} />
                                 ))}
                             </div>
                         </div>

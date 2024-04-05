@@ -59,10 +59,14 @@ function TablesStatus() {
     };
 
     return (
-        <div className='arrange-areas-horizontally'>
+        <div className='horizontally'>
             {tables.map(table => (
                 <div className='table' key={table.Id}>
-                    {table.TableNumber}桌 {table.TablesStatus}
+                    <div className='text-space-between'>
+                        <p>{table.TableNumber}桌</p>
+                        <p>{table.TablesStatus}</p>
+                    </div>
+                    <hr />
                     {table.TablesStatus === "空桌" ? (
                         <button onClick={() => handleNewOrder(table.TableNumber)}>建立新訂單</button>
                     ) : table.TablesStatus === "清潔中" ? (
@@ -74,8 +78,11 @@ function TablesStatus() {
                             <button onClick={() => handleOrder(table.MainOrderId)}>前往點餐</button>
                         </React.Fragment>
                     )}
+                    <hr />
                     <button onClick={() => handleViewOrder(table.MainOrderId)} disabled={!table.MainOrderId}>查看訂單</button>
+                    <hr />
                     <button onClick={() => handleCheckout(table.MainOrderId)} disabled={!table.MainOrderId}>結帳</button>
+                    <hr />
                     <button onClick={() => handlePrintQRCode(table.MainOrderId, table.TableNumber)} disabled={!table.MainOrderId}>列印點餐QRCODE</button>
                 </div>
             ))}
