@@ -26,9 +26,9 @@ function MenuItem({ item, onAddToCart }) {
         </div>
       </div>
       <div className='horizontally'>
-        <button onClick={handleSubtract}>-</button>
+        <button className='order-button' onClick={handleSubtract}>-</button>
         <span>{quantity}</span>
-        <button onClick={handleAdd}>+</button>
+        <button className='order-button' onClick={handleAdd}>+</button>
       </div>
     </div>
   );

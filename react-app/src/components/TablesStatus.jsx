@@ -62,28 +62,28 @@ function TablesStatus() {
         <div className='wrap'>
             {tables.map(table => (
                 <div className='table' key={table.Id}>
-                    <div className='text-space-between'>
+                    <div className='tablenumber-tablestatus'>
                         <p>{table.TableNumber}桌</p>
                         <p>{table.TablesStatus}</p>
                     </div>
                     <hr />
                     {table.TablesStatus === "空桌" ? (
-                        <button onClick={() => handleNewOrder(table.TableNumber)}>建立新訂單</button>
+                        <button className='table-button' onClick={() => handleNewOrder(table.TableNumber)}>建立新訂單</button>
                     ) : table.TablesStatus === "清潔中" ? (
                         <React.Fragment>
-                            <button onClick={() => handleCleanCompleted(table.TableNumber)}>清潔完畢</button>
+                            <button className='table-button' onClick={() => handleCleanCompleted(table.TableNumber)}>清潔完畢</button>
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <button onClick={() => handleOrder(table.MainOrderId)}>前往點餐</button>
+                            <button className='table-button' onClick={() => handleOrder(table.MainOrderId)}>前往點餐</button>
                         </React.Fragment>
                     )}
                     <hr />
-                    <button onClick={() => handleViewOrder(table.MainOrderId)} disabled={!table.MainOrderId}>查看訂單</button>
+                    <button className='table-button' onClick={() => handleViewOrder(table.MainOrderId)} disabled={!table.MainOrderId}>查看訂單</button>
                     <hr />
-                    <button onClick={() => handleCheckout(table.MainOrderId)} disabled={!table.MainOrderId}>結帳</button>
+                    <button className='table-button' onClick={() => handleCheckout(table.MainOrderId)} disabled={!table.MainOrderId}>結帳</button>
                     <hr />
-                    <button onClick={() => handlePrintQRCode(table.MainOrderId, table.TableNumber)} disabled={!table.MainOrderId}>列印點餐QRCODE</button>
+                    <button className='table-button' onClick={() => handlePrintQRCode(table.MainOrderId, table.TableNumber)} disabled={!table.MainOrderId}>列印點餐QRCODE</button>
                 </div>
             ))}
         </div>

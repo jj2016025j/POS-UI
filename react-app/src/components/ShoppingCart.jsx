@@ -30,7 +30,7 @@ function ShoppingCart() {
         <div className='text-space-between'><p>SUBTOTAL</p><p>$150</p></div>
         <div className='text-space-between'><p>TAX</p><p>$15</p></div>
         <div className='text-space-between'><p>TOTAL</p><p>$165</p></div>
-        <button onClick={handleConfirmOrder}>確認訂單</button>
+        <button className='confirm-order-button' onClick={handleConfirmOrder}>確認訂單</button>
       </div>
     </aside >
   );
