@@ -1,5 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
+import SubTitle from '../components/SubTitle';
+
 function ShoppingCart() {
   const history = useHistory();
   // function ShoppingCart({ cartItems, mainOrderId }) {
@@ -12,8 +15,8 @@ function ShoppingCart() {
 
   return (
     <aside>
-      <div>
-        <h2>購物車 Menu</h2>
+      <SubTitle />
+      <div className='cart-list-group'>
         <div>
           {/* {cartItems.map(item => (
           <div key={item.Id}>
@@ -23,7 +26,7 @@ function ShoppingCart() {
         <h3>总计: ${totalAmount}</h3> */}
         </div>
       </div>
-      <div>
+      <div className='cart-total-group'>
         <div className='text-space-between'><p>SUBTOTAL</p><p>$150</p></div>
         <div className='text-space-between'><p>TAX</p><p>$15</p></div>
         <div className='text-space-between'><p>TOTAL</p><p>$165</p></div>

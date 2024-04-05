@@ -32,7 +32,7 @@ function OrderHistory() {
   return (
     <React.Fragment>
       <div className='function'>
-        <div className='horizontally'>
+        <div className='wrap'>
           {orders.map(order => (
             <li className='history-order' key={order.MainOrderId} onClick={() => handleOrderClick(order.MainOrderId)}>
               <div className='text-space-between'>

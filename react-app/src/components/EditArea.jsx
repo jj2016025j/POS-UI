@@ -36,7 +36,7 @@ function EditArea() {
     // };
 
     return (
-        <aside>
+        <React.Fragment>
             <h2>品項編輯</h2>
             {/* <img src={editingItem.image_url} alt={editingItem.MenuItemName} style={{ width: '100px', height: '100px' }} />
 
@@ -70,7 +70,7 @@ function EditArea() {
                 </select> */}
             {/* <button onClick={handleSave}>保存</button>
                 <button onClick={handleDelete}>刪除</button> */}
-        </aside >
+        </React.Fragment >
     );
 }
 

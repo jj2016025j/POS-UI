@@ -49,6 +49,7 @@ const TitleComponent = () => {
     return (
         <div className="title-group">
             <h1 className='title'>{title}</h1>
+            <h1 className='search'>{}</h1>
         </div>
     )
 

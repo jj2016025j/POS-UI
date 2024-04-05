@@ -59,7 +59,7 @@ function TablesStatus() {
     };
 
     return (
-        <div className='horizontally'>
+        <div className='wrap'>
             {tables.map(table => (
                 <div className='table' key={table.Id}>
                     <div className='text-space-between'>
