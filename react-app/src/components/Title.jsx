@@ -11,7 +11,7 @@ const TitleComponent = () => {
     } else if (/^\/vieworder\/.+$/.test(location.pathname)) {
         title = '查看訂單 VIEW ORDER';
     } else if (/^\/confirmsuborder\/.+$/.test(location.pathname)) {
-        title = 'CONFIRM';
+        title = '確認訂單 CONFIRM';
     } else if (/^\/checkout\/.+$/.test(location.pathname)) {
         title = '結帳 CHECKOUT';
     } else {

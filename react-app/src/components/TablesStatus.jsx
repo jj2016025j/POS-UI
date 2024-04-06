@@ -62,9 +62,12 @@ function TablesStatus() {
         <div className='wrap'>
             {tables.map(table => (
                 <div className='table' key={table.Id}>
-                    <div className='tablenumber-tablestatus'>
+                    <div className={`tablenumber-tablestatus`}>
                         <p>{table.TableNumber}桌</p>
-                        <p>{table.TablesStatus}</p>
+                        <p className={`${table.TablesStatus === "空桌" || table.TablesStatus === "清潔中" ? 'table-status-cleaning'
+                            : table.TablesStatus === "點餐中" ? 'table-status-ordering'
+                                : 'table-status-other'
+                            }`}>{table.TablesStatus}</p>
                     </div>
                     <hr />
                     {table.TablesStatus === "空桌" ? (
