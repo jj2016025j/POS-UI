@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import SubTitle from '../components/SubTitle';
 
@@ -9,18 +10,27 @@ function ShoppingCart() {
   const history = useHistory();
 
   const { mainOrderId } = useParams();
-  const { cartItems } = useCart();
-  const itemsForTable = cartItems[mainOrderId] || [];
-  const totalAmount = itemsForTable.reduce((total, item) => total + item.quantity * item.Price, 0);
+  const { cartItems, generateOrderSummary } = useCart();
+
+  const itemsForTable = Array.isArray(cartItems[mainOrderId]) ? cartItems[mainOrderId] : [];
+    const totalAmount = itemsForTable.reduce((total, item) => total + item.quantity * item.Price, 0);
+  const orderSummary = generateOrderSummary(mainOrderId);
+  console.log("cartItems",cartItems)
+  console.log("orderSummary",orderSummary)
 
   const handleConfirmOrder = () => {
-    // 检查购物车是否为空
-    if (itemsForTable.length === 0) {
-      // 如果购物车为空，则显示警告
+    if (orderSummary.items.length === 0) {
       alert("購物車是空的，請添加品項後再確認訂單。");
     } else {
-      // 如果购物车不为空，则跳转到确认订单页面
-      history.push(`/confirmsuborder/${mainOrderId}`);
+      axios.post(`/order/addSubOrder/${mainOrderId}`)
+        .then((response) => {
+          const subOrderId = response.data.SubOrderId;
+          console.log(`新建訂單成功，訂單ID: ${subOrderId}`);
+          history.push(`/confirmsuborder/${mainOrderId}?subOrderId=${subOrderId}`);
+        })
+        .catch(error => {
+          console.error('Error fetching TableId:', error);
+        });
     }
   };
 

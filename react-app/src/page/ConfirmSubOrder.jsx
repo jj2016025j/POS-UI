@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../contexts/CartContext';
 
@@ -8,28 +8,30 @@ function ConfirmSubOrder() {
   const tableNumber = table ? table.TableNumber : null;
   const history = useHistory();
   const { mainOrderId } = useParams();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const subOrderId = query.get('subOrderId');
   const { cartItems } = useCart();
   const itemsForCurrentTable = cartItems[mainOrderId] || []; // 假设mainOrderId用于标识不同的购物车
 
   const totalAmount = itemsForCurrentTable.reduce((total, item) => total + item.quantity * item.Price, 0);
 
   useEffect(() => {
-    axios.get(`/order/getTableIdByMainOrderId/${mainOrderId}`)
-      .then(response => {
-        setTable(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching TableId:', error);
-      });
+
   }, []);
 
   const handleSubmitOrder = () => {
     const isConfirmed = window.confirm("确认提交订单吗?");
     if (isConfirmed) {
-      // 发送订单请求的逻辑
       console.log("发送订单请求", { mainOrderId, cartItems });
-      // 假设订单请求成功
-      history.push('/pos'); // 成功后导航回首页
+      axios.post(`/order/SubOrder/${mainOrderId}`, { cartItems })
+        .then(() => {
+          alert("送出訂單成功")
+          history.push('/pos'); // 成功后导航回首页
+        })
+        .catch(error => {
+          console.error('Error fetching TableId:', error);
+        });
     }
   };
 
@@ -39,24 +41,35 @@ function ConfirmSubOrder() {
         <div className="comfirm-order-group">
           <div className="sub-order">
             <div className="text-space-between">
-              <p>桌号: {tableNumber}</p>
+              <p>子訂單編號: {subOrderId}</p>
+            </div>
+            <div className="text-space-between">
+              <p>桌號: </p>
+            </div>
+            <div className="text-space-between">
+              <p>2024-04-12 18:54:06</p>
             </div>
             <hr />
             {itemsForCurrentTable.map((item, index) => (
-              <div className='menu-list-item' key={index}>
-                <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
-                <div>
-                  <p>{item.MenuItemName}</p>
-                  <div className='text-space-between'>
-                    <p>{item.quantity} </p>
-                    <p>${item.Price}</p>
-                    <p>${item.quantity * item.Price}</p>
+              <React.Fragment>
+                <div className='menu-list-item' key={index}>
+                  <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
+                  <div className='menu-item-info'>
+                    <p>{item.MenuItemName}</p>
+                    <div className='text-space-between'>
+                      <p>{item.quantity} </p>
+                      <p>${item.Price}</p>
+                      <p>${item.quantity * item.Price}</p>
+                    </div>
                   </div>
                 </div>
                 <hr />
-              </div>
+              </React.Fragment>
             ))}
-            <h3>總計 ${totalAmount}</h3>
+            <div className='text-space-between'>
+              <p>總計</p>
+              <p>${totalAmount}</p>
+            </div>
           </div>
           <button className='send-order-button' onClick={handleSubmitOrder}>送出訂單</button>
         </div>

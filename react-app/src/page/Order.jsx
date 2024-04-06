@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'; // 引入useParams
 import MenuItem from '../components/MenuItem';
-import ShoppingCart from '../components/ShoppingCart';
 import CategoryTitle from '../components/CategoryTitle';
 
 function Menu() {
