@@ -7,7 +7,7 @@ function TablesStatus() {
     let history = useHistory();
 
     useEffect(() => {
-        axios.get('/order/getAllMainOrder')
+        axios.get('/order/getAllTableStatus')
             .then(response => setTables(response.data))
             .catch(error => console.error('Error fetching tables status:', error));
     }, []);
@@ -17,12 +17,19 @@ function TablesStatus() {
     };
 
     const handleNewOrder = (TableNumber) => {
+        console.log("發送新訂單請求")
         axios.post(`/order/new-order`, { TableNumber })
             .then(response => {
                 const updatedTableInfo = response.data;
+                console.log(tables)
+                console.log(updatedTableInfo)
+
                 setTables(tables => tables.map(table =>
                     table.TableNumber === TableNumber ? { ...table, ...updatedTableInfo } : table
                 ));
+                console.log(tables)
+
+                console.log("更新桌號資訊")
             })
             .catch(error => console.error('Error creating new order:', error));
     };
@@ -57,18 +64,27 @@ function TablesStatus() {
             })
             .catch(error => console.error('Error updating table status:', error));
     };
+    const checkOutALL = () => {
+        axios.put(`/pay/checkoutAll`)
+            .then(response => {
+                const updatedTableInfo = response.data;
+                setTables(updatedTableInfo);
+            })
+            .catch(error => console.error('Error updating table status:', error));
+    };
+
 
     return (
         <div className='wrap'>
             {tables.map(table => (
                 <div className='table' key={table.Id}>
                     <div className={`tablenumber-tablestatus`}>
-                        <p>{table.TableNumber}桌</p>
-                        <p className={`${table.TablesStatus === "空桌" || table.TablesStatus === "清潔中" ? 'table-status-cleaning'
-                            : table.TablesStatus === "點餐中" ? 'table-status-ordering'
+                        <p className={`${table.TablesStatus === "空桌" ? 'table-status-cleaning'
+                            : table.TablesStatus === "點餐中" || table.TablesStatus === "清潔中" ? 'table-status-ordering'
                                 : 'table-status-other'
                             }`}>{table.TablesStatus}</p>
                     </div>
+                    <p className='table-number'>{table.TableNumber}</p>
                     <hr />
                     {table.TablesStatus === "空桌" ? (
                         <button className='table-button' onClick={() => handleNewOrder(table.TableNumber)}>建立新訂單</button>
@@ -87,6 +103,8 @@ function TablesStatus() {
                     <button className='table-button' onClick={() => handleCheckout(table.MainOrderId)} disabled={!table.MainOrderId}>結帳</button>
                     <hr />
                     <button className='table-button' onClick={() => handlePrintQRCode(table.MainOrderId, table.TableNumber)} disabled={!table.MainOrderId}>列印點餐QRCODE</button>
+                    <hr />
+                    <button className='table-button' onClick={() => checkOutALL()}>一鍵結帳</button>
                 </div>
             ))}
         </div>

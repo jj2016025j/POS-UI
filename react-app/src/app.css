@@ -198,17 +198,6 @@ aside {
     cursor: pointer
 }
 
-.table-button {
-    background: #FFF;
-    color: #000;
-    border: 0px none rgba(255, 255, 255, 0);
-}
-
-.table-button:hover {
-    background: #efefef;
-    cursor: pointer;
-}
-
 .table {
     width: 200px;
     /* height: 200px; */
@@ -228,9 +217,37 @@ aside {
     width: 100%;
 }
 
+.table-number {
+    font-size: 48px;
+    /* 或者其他你想要的大小 */
+    text-align: center;
+    /* 文字水平居中 */
+    width: 100%;
+    /* 确保<p>标签占满其父容器的宽度 */
+    display: block;
+    /* <p>标签默认就是块级元素，这里只是为了确认 */
+    margin: auto;
+}
+
+.table-button {
+    background: #FFF;
+    color: #000;
+    border: 0px none rgba(255, 255, 255, 0);
+}
+
+.table-button:hover {
+    background: #efefef;
+    cursor: pointer;
+}
+
+.table-button[disabled] {
+    color: #d1d1d1;
+    cursor: not-allowed;
+}
+
 [class*="table-status-"] {
     padding: 5px 10px;
-    margin-left: auto;
+    /* margin-left: auto; */
     color: rgb(255, 255, 255);
     border-radius: 20px;
 }

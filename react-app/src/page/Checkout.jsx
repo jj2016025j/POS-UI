@@ -43,25 +43,37 @@ function Confirmpayment() {
   // 然後按下確認或是等三秒就會返回首頁
   // 发送结账请求的逻辑
 
+  const handleViewOrder = (mainOrderId) => {
+    history.push(`/vieworder/${mainOrderId}`);
+  };
+
+  const handleCashPayment = () => {
+    const isConfirmed = window.confirm("確定結帳?");
+    if (isConfirmed) {
+      axios.post(`/pay/checkout/${mainOrderId}`)
+        .then(() => {
+          alert("结账成功！");
+          history.push('/');
+        })
+        .catch(error => { 
+          // console.error('Error fetching tables status:', error)
+          console.log(error.response)
+        });
+    }
+  };
+
   const handleLinePay = () => {
     // 使用window.confirm替代alert来询问用户是否确认
     const isConfirmed = window.confirm("請前往確認LINE PAY商家端是否收到正確金額");
     setTimeout(() => {
       history.push('/');
     }, 3000);
-  
+
     if (isConfirmed) {
       // 用户选择了“是”，立即进行结账处理并跳转
       alert("结账成功！");
       history.push('/'); // 立即跳转
     }
-  };
-  
-  const handleCashPayment = () => {
-    // 发送现金结账请求的逻辑
-    // 假设结账成功
-    alert("结账成功！");
-    history.push('/');
   };
 
   const handleCalculatorInput = (value) => {
@@ -85,22 +97,27 @@ function Confirmpayment() {
     <div>
       {orderDetails && (
         <>
-          <p>Trade Number: {mainOrderId}</p>
-          <p>桌号: {orderDetails.TableId}</p>
-          <p>创建时间: {new Date(orderDetails.CreateTime).toLocaleString()}</p>
+          <div className="text-space-between">
+            <p>Trade Number: {mainOrderId}</p>
+            <p>{new Date(orderDetails.CreateTime).toLocaleString()}</p>
+          </div>
+          <p>桌號: {orderDetails.TableId}</p>
           <p>訂單加總: ${orderDetails.SubTotal}</p>
           <p>小費: ${orderDetails.ServiceFee}</p>
-          <p>总金额: ${orderDetails.Total}</p>
-          {/* 其他详情 */}
+          <p>總金額: ${orderDetails.Total}</p>
         </>
       )}
-      <button onClick={handleCashPayment}>现金结账</button>
+      <button onClick={handleCashPayment}>現金結帳</button>
       <button onClick={handleLinePay}>LINE PAY</button>
-      <button disabled>信用卡支付 (未启用)</button>
+      <button disabled>信用卡支付</button>
+      <button onClick={handleViewOrder}>查看訂單</button>
       <div>
         <input value={inputAmount} onChange={(e) => setInputAmount(e.target.value)} />
-        <p>找零: ${change}</p>
-        <button onClick={autoFillTotalAmount}>自动填充总金额</button>
+        <div className="text-space-between">
+          <p>找零:</p>
+          <p>${change}</p>
+        </div>
+        <button onClick={autoFillTotalAmount}></button>
         {/* 数字键和操作符 */}
         {['1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '=', 'C'].map(key => (
           <button key={key} onClick={() => handleCalculatorInput(key)}>{key}</button>
