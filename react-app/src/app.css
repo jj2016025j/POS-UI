@@ -1,0 +1,605 @@
+* {
+    /* border: 1px solid rgb(156, 130, 76); */
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #000;
+}
+
+nav,
+aside,
+.category {
+    background-color: #FFF;
+    display: flex;
+}
+
+html,
+body,
+.myBody {
+    background-color: #F6F4F0;
+    display: flex;
+}
+
+
+nav,
+aside,
+.table,
+.category,
+.menuItem,
+.history-order {
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
+}
+
+html,
+body,
+.myBody {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+nav {
+    width: 150px;
+    height: 100vh;
+    padding: 30px 0px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 30px;
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+section {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    /* padding: 30px; */
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: flex-start;
+    align-self: stretch;
+    /* gap: 30px; */
+    overflow: hidden;
+}
+
+aside {
+    /* padding: 30px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    align-self: stretch;
+    width: 350px;
+    height: 100vh;
+    gap: 20px;
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.nav-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-self: center;
+}
+
+.nav-link,
+.category {
+    display: flex;
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    flex: 0 0 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.category {
+    border-radius: 20px;
+}
+
+.nav-link:link,
+.nav-link:visited {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.nav-link:hover,
+.category:hover {
+    color: white;
+    background-color: rgb(206, 206, 206);
+}
+
+.title-group {
+    display: flex;
+    padding: 30px;
+    align-items: stretch;
+    align-self: stretch;
+    gap: 30px;
+    /* background-color: #FFF;
+    z-index: 30; */
+
+}
+
+.categories {
+    display: flex;
+    padding: 30px;
+    padding: 30px 40px;
+    align-self: stretch;
+    gap: 30px;
+    /* background-color: #FFF;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
+    z-index: 30; */
+}
+
+.function {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    align-self: stretch;
+    height: 100%;
+    width: 100%;
+    padding: 30px;
+    gap: 30px;
+    overflow-y: scroll;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+}
+
+.menu-item-list {
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.menuItem {
+    padding: 10px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #FFF;
+}
+
+.order-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: #bcab82;
+    color: #ffffff;
+    border: 0px none rgba(255, 255, 255, 0);
+}
+
+.order-button:hover {
+    background: #928565;
+    cursor: pointer
+}
+
+.table {
+    width: 200px;
+    /* height: 200px; */
+    padding: 10px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #FFF;
+}
+
+.tablenumber-tablestatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.table-number {
+    font-size: 48px;
+    /* 或者其他你想要的大小 */
+    text-align: center;
+    /* 文字水平居中 */
+    width: 100%;
+    /* 确保<p>标签占满其父容器的宽度 */
+    display: block;
+    /* <p>标签默认就是块级元素，这里只是为了确认 */
+    margin: auto;
+}
+
+.table-button {
+    background: #FFF;
+    color: #000;
+    border: 0px none rgba(255, 255, 255, 0);
+}
+
+.table-button:hover {
+    background: #efefef;
+    cursor: pointer;
+}
+
+.table-button[disabled] {
+    color: #d1d1d1;
+    cursor: not-allowed;
+}
+
+[class*="table-status-"] {
+    padding: 5px 10px;
+    /* margin-left: auto; */
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.table-status-empty,
+.table-status-cleaning {
+    /* 空桌 */
+    /* 清潔中 */
+    background-color: green;
+}
+
+.table-status-ordering {
+    /* 點餐中 */
+    background-color: orange;
+}
+
+.table-status-other {
+    /* 其他状态 */
+    background-color: red;
+}
+
+hr {
+    background: #E2CF9D;
+    color: #E2CF9D;
+    border: 1px solid #E2CF9D;
+}
+
+.history-order {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #FFF;
+    width: 500px;
+    height: 50px;
+}
+
+.menuItem {
+    padding: 10px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #FFF;
+    width: 175px;
+    height: 150px;
+}
+
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+}
+
+.horizontally {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+}
+
+.vertically {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.text-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.cart-list-group {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.cart-total-group {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+    background: #F9F1DD;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.25);
+}
+
+.confirm-order-button {
+    display: flex;
+    padding: 10px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    align-self: stretch;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #BC8341;
+    border: 0px none rgba(255, 255, 255, 0);
+}
+
+.outside {
+    display: flex;
+    /* padding: 30px; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    align-self: stretch;
+}
+
+.comfirm-order-group {
+    display: flex;
+    min-width: 600px;
+    max-width: 600px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.sub-order {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.menu-list-item {
+    padding: 10px;
+    display: flex;
+    justify-content: stretch;
+    align-self: stretch;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.menu-item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: flex-start;
+    gap: 5px;
+    flex: 1 0 0;
+    align-items: stretch;
+}
+
+.send-order-button {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    gap: 30px;
+    flex: 1 0 0;
+    border-radius: 10px;
+    background: #a7801d;
+    color: #fff;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.25);
+    border: 0px none rgba(255, 255, 255, 0);
+}
+
+.checkout-funtion {
+    padding: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.cash-payment,
+.lind-pay,
+.credit-card {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    align-self: stretch;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.25);
+}
+
+.cash-payment {
+    background: #B58C24;
+}
+
+.lind-pay {
+    background: #30B524;
+}
+
+.credit-card {
+    background: #4888AC;
+}
+
+.calculator {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.amount-charged {
+    display: flex;
+    padding: 10px 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 30px;
+    background: #FFF;
+    border: none;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+
+}
+
+.change {
+    padding: 10px 20px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.same {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    align-self: stretch;
+    border-radius: 30px;
+    background: #B58C24;
+    border: none;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.key-boards {
+    display: flex;
+    width: 309px;
+    height: 411px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.key-board {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 10px;
+    background: #B58C24;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+.title,
+h1 {
+    flex: 1 0 0;
+    color: #000;
+    font-family: "Segoe UI";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+li h1 {
+    color: #000;
+    text-align: center;
+    font-family: "Segoe UI";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+li p {
+    color: #000;
+    text-align: center;
+    font-family: "Segoe UI";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+/* .table p {
+    color: #000;
+    text-align: center;
+    font-family: "Segoe UI";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+} */
+
+
+/* .search {
+    display: flex;
+    padding: 10px 20px;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 30px;
+    background: #FFF;
+} */
