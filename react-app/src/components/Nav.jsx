@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import myImage from '../image/120pixel.png';
 function Nav() {
 
   return (
     <nav>
-      <img src={""} alt={""} style={{ width: '100px', height: '100px' }} />
+      <img src={myImage} alt={"LOGO"} style={{ width: '80px', height: '80px' }} />
       <div className='nav-link-list'>
         <NavLink className="nav-link active" aria-current="page" to="/pos">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-book" viewBox="0 0 16 16">
