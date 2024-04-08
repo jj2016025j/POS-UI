@@ -24,7 +24,7 @@ function ConfirmSubOrder() {
     const isConfirmed = window.confirm("确认提交订单吗?");
     if (isConfirmed) {
       console.log("发送订单请求", { mainOrderId, cartItems });
-      axios.post(`/order/SubOrder/${mainOrderId}`, { cartItems })
+      axios.post(`/order/SubOrder/${mainOrderId}`, { items: itemsForCurrentTable })
         .then(() => {
           alert("送出訂單成功")
           history.push('/pos'); // 成功后导航回首页
@@ -51,8 +51,8 @@ function ConfirmSubOrder() {
             </div>
             <hr />
             {itemsForCurrentTable.map((item, index) => (
-              <React.Fragment>
-                <div className='menu-list-item' key={index}>
+              <React.Fragment key={index}>
+                <div className='menu-list-item'>
                   <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
                   <div className='menu-item-info'>
                     <p>{item.MenuItemName}</p>
