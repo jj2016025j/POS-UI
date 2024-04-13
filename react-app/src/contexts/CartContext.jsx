@@ -11,10 +11,10 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState({});
+    const [SubOrderInfo, setCartItems] = useState({});
 
     useEffect(() => {
-        const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        const storedCartItems = JSON.parse(localStorage.getItem('SubOrderInfo'));
         if (storedCartItems) {
             setCartItems(storedCartItems);
         }
@@ -22,9 +22,9 @@ export const CartProvider = ({ children }) => {
 
     // 购物车数据有更新时，同步到 localStorage
     useEffect(() => {
-        console.log("cartItems", cartItems);
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }, [cartItems]);
+        console.log("SubOrderInfo", SubOrderInfo);
+        localStorage.setItem('SubOrderInfo', JSON.stringify(SubOrderInfo));
+    }, [SubOrderInfo]);
 
     const updateCartSummary = (itemsForTable) => {
         const total = itemsForTable.reduce((total, item) => total + item.quantity * item.Price, 0);
@@ -74,13 +74,13 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-    const getOrderSummary = (mainOrderId) => {
-        return cartItems[mainOrderId] || {};
+    const getSubOrderInfo = (mainOrderId) => {
+        return SubOrderInfo[mainOrderId] || {};
     };
 
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, getOrderSummary }}>
+        <CartContext.Provider value={{ SubOrderInfo, addToCart, getSubOrderInfo }}>
             {children}
         </CartContext.Provider>);
 };

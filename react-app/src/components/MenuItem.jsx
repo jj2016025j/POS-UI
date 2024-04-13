@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 
-function MenuItem({ item, onAddToCart }) {
+function MenuItem({ item }) {
   const [quantity, setQuantity] = useState(0);
   const { addToCart } = useCart();
   const { mainOrderId } = useParams();
@@ -14,15 +14,15 @@ function MenuItem({ item, onAddToCart }) {
   const handleAdd = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
-    console.log("mainOrderId", mainOrderId,"item", item,"newQuantity", newQuantity)
-    addToCart(mainOrderId, item, newQuantity); // 假設 mainOrderId 是這個組件的 prop 或從上層組件獲取
+    console.log("mainOrderId", mainOrderId, "item", item, "newQuantity", newQuantity)
+    addToCart(mainOrderId, item, newQuantity);
   };
 
   const handleSubtract = () => {
     const newQuantity = Math.max(0, quantity - 1);
     setQuantity(newQuantity);
-    console.log("mainOrderId", mainOrderId,"item", item,"newQuantity", newQuantity)
-    addToCart(mainOrderId, item, newQuantity);  // 確保這裡也使用 addToCart 來更新數量
+    console.log("mainOrderId", mainOrderId, "item", item, "newQuantity", newQuantity)
+    addToCart(mainOrderId, item, newQuantity);
   };
 
   return (

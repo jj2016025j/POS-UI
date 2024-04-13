@@ -16,14 +16,14 @@ function ShoppingCart() {
   const history = useHistory();
 
   const { mainOrderId } = useParams();
-  const { getOrderSummary } = useCart();
+  const { getSubOrderInfo } = useCart();
 
-  const orderSummary = getOrderSummary(mainOrderId);
-  // console.log("cartItems",cartItems)
-  // console.log("orderSummary",orderSummary)
+  const SubOrderInfo = getSubOrderInfo(mainOrderId);
+  // console.log("SubOrderInfo",SubOrderInfo)
+  // console.log("SubOrderInfo",SubOrderInfo)
 
   const handleConfirmOrder = () => {
-    if (orderSummary.items.length === 0) {
+    if (SubOrderInfo.items.length === 0) {
       alert("購物車是空的，請添加品項後再確認訂單。");
     } else {
       axios.post(`/order/addSubOrder/${mainOrderId}`)
@@ -43,8 +43,8 @@ function ShoppingCart() {
       <SubTitle />
       <div className='cart-list-group'>
         <div>
-          {orderSummary.items && orderSummary.items.length > 0 ? (
-            orderSummary.items.map(item => (
+          {SubOrderInfo.items && SubOrderInfo.items.length > 0 ? (
+            SubOrderInfo.items.map(item => (
               <div key={item.Id}>
                 <p>{item.MenuItemName}: {item.quantity} x ${item.Price} = ${item.quantity * item.Price}</p>
               </div>
@@ -57,7 +57,7 @@ function ShoppingCart() {
       <div className='cart-total-group'>
         <div className='text-space-between'>
           <p>TOTAL</p>
-          <p>${orderSummary.total ? (orderSummary.total) : (0)}</p>
+          <p>${SubOrderInfo.total ? (SubOrderInfo.total) : (0)}</p>
         </div>
         <button className='confirm-order-button' onClick={handleConfirmOrder}>確認訂單</button>
       </div>

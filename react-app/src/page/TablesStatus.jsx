@@ -7,18 +7,21 @@ import Table from '../components/Table';
 
 function TablesStatus() {
     const [tables, setTables] = useState([]);
-
     useEffect(() => {
+        fetchTables();
+    }, []);
+
+    const fetchTables = () => {
         axios.get('/order/getAllTableStatus')
             .then(response => setTables(response.data))
             .catch(error => {
                 console.error('Error fetching tables status:', error);
-                alert('無法獲取桌位狀態，請檢查網路連接');
+                alert('无法获取桌位状态，请检查网络连接');
             });
-    }, []);
+    };
 
     const updateTable = (tableId, updatedInfo) => {
-        setTables(tables => tables.map(table => 
+        setTables(tables => tables.map(table =>
             table.Id === tableId ? { ...table, ...updatedInfo } : table
         ));
     };
@@ -30,7 +33,7 @@ function TablesStatus() {
     return (
         <div className='wrap'>
             {tables.map(table => (
-                <Table key={table.Id} table={table} updateTable={updateTable} updateTables={updateTables}/>
+                <Table key={table.Id} table={table} updateTable={updateTable} updateTables={fetchTables} />
             ))}
         </div>
     );

@@ -11,7 +11,7 @@ import MenuItem from '../components/MenuItem';
 function Menu() {
     const { mainOrderId } = useParams(); // 从URL获取mainOrderId
     const [menuData, setMenuData] = useState({ categories: [], menuItems: [] });
-    const [cartItems, setCartItems] = useState([]);
+    const [SubOrderInfo, setCartItems] = useState([]);
     const categoryRefs = useRef({});
 
     useEffect(() => {
@@ -31,20 +31,6 @@ function Menu() {
         if (ref && ref.current) {
             ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    };
-
-    const handleAddToCart = (item, quantity) => {
-        setCartItems(prevItems => {
-            const itemIndex = prevItems.findIndex(it => it.Id === item.Id);
-            if (itemIndex > -1) {
-                const newItems = [...prevItems];
-                newItems[itemIndex].quantity = quantity;
-                return newItems.filter(it => it.quantity > 0);
-            } else if (quantity > 0) {
-                return [...prevItems, { ...item, quantity }];
-            }
-            return prevItems;
-        });
     };
 
     return (
@@ -68,7 +54,7 @@ function Menu() {
                             <h1>{category.CategoryName}</h1>
                             <div className='menu-item-list'>
                                 {menuData.menuItems.filter(item => item.CategoryId === category.Id).map(item => (
-                                    <MenuItem key={item.Id} item={item} onAddToCart={handleAddToCart} />
+                                    <MenuItem key={item.Id} item={item} />
                                 ))}
                             </div>
                         </div>

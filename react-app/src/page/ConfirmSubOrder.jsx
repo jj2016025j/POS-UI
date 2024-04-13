@@ -16,20 +16,20 @@ function ConfirmSubOrder() {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const subOrderId = query.get('subOrderId');
-  const { getOrderSummary } = useCart();
+  const { getSubOrderInfo } = useCart();
 
-  const orderSummary = getOrderSummary(mainOrderId);
+  const SubOrderInfo = getSubOrderInfo(mainOrderId);
 
   useEffect(() => {
 
   }, []);
 
   const handleSubmitOrder = () => {
-    console.log("发送订单请求", { mainOrderId });
-    axios.post(`/order/SubOrder/${mainOrderId}`, { items: orderSummary.items })
+    console.log("发送订单请求", subOrderId, SubOrderInfo);
+    axios.post(`/order/SubOrder/${subOrderId}`, { SubOrderInfo: SubOrderInfo })
       .then(() => {
         alert("送出訂單成功")
-        // history.push('/pos'); // 成功后导航回首页
+        history.push('/pos'); // 成功后导航回首页
       })
       .catch(error => {
         console.error('Error fetching TableId:', error);
@@ -54,7 +54,7 @@ function ConfirmSubOrder() {
               <p>2024-04-12 18:54:06</p>
             </div>
             <hr />
-            {orderSummary.items && orderSummary.items.length > 0 ? (orderSummary.items.map((item, index) => (
+            {SubOrderInfo.items && SubOrderInfo.items.length > 0 ? (SubOrderInfo.items.map((item, index) => (
               <React.Fragment key={index}>
                 <div className='menu-list-item'>
                   <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
@@ -72,7 +72,7 @@ function ConfirmSubOrder() {
             ))) : (<></>)}
             <div className='text-space-between'>
               <p>總計</p>
-              <p>${orderSummary.total ? (orderSummary.total) : (0)}</p>
+              <p>${SubOrderInfo.total ? (SubOrderInfo.total) : (0)}</p>
             </div>
           </div>
           <button className='send-order-button' onClick={handleSubmitOrder}>送出訂單</button>

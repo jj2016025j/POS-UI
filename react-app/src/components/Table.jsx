@@ -26,7 +26,11 @@ function Table({ table, updateTable, updateTables }) {
                 updateTable(table.Id, updatedTableInfo);
                 console.log("更新桌號資訊")
             })
-            .catch(error => console.error('Error creating new order:', error));
+            .catch(error => {
+                console.error('Error creating new order:', error)
+                alert('创建新订单失败');
+            });
+
     };
 
     const handleViewOrder = () => {
@@ -49,7 +53,8 @@ function Table({ table, updateTable, updateTables }) {
     const handleCleanCompleted = () => {
         axios.post(`/order/clean-table`, { TableNumber: table.TableNumber, TablesStatus: '空桌' })
             .then(response => {
-                alert('桌子已清潔完畢');
+                const updatedInfo = response.data;
+                updateTable(table.Id, updatedInfo);
             })
             .catch(error => console.error('Error updating table status:', error));
     };

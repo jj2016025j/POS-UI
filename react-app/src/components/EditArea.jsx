@@ -2,9 +2,9 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 function EditArea() {
 
-    // function ShoppingCart({ cartItems, mainOrderId }) {
+    // function ShoppingCart({ SubOrderInfo, mainOrderId }) {
     //     const history = useHistory();
-    //     const totalAmount = cartItems.reduce((total, item) => total + (item.quantity * item.Price), 0);
+    //     const totalAmount = SubOrderInfo.reduce((total, item) => total + (item.quantity * item.Price), 0);
 
     //     const handleConfirmOrder = () => {
     //         history.push(`/confirmsuborder/${mainOrderId}`);
