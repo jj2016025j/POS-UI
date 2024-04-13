@@ -1,8 +1,12 @@
+/**
+ * 取得分類並顯示V
+ * 取得品項並傳給品項組件V
+ * 點擊分類會轉到分類的品項V
+ */
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'; // 引入useParams
 import MenuItem from '../components/MenuItem';
-import CategoryTitle from '../components/CategoryTitle';
 
 function Menu() {
     const { mainOrderId } = useParams(); // 从URL获取mainOrderId
@@ -61,7 +65,7 @@ function Menu() {
                 <div className='menu'>
                     {menuData.categories.map(category => (
                         <div key={category.Id} ref={categoryRefs.current[category.Id]} className='category-section'>
-                            <CategoryTitle title={category.CategoryName} />
+                            <h1>{category.CategoryName}</h1>
                             <div className='menu-item-list'>
                                 {menuData.menuItems.filter(item => item.CategoryId === category.Id).map(item => (
                                     <MenuItem key={item.Id} item={item} onAddToCart={handleAddToCart} />

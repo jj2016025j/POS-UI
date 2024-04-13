@@ -1,4 +1,7 @@
-// MenuItem.js
+/**
+ * 取得品項並依照分類顯示V
+ * 點擊品項+-號會呼叫usecontext幫忙改變購物車內容V
+ */
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
@@ -11,13 +14,15 @@ function MenuItem({ item, onAddToCart }) {
   const handleAdd = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
+    console.log("mainOrderId", mainOrderId,"item", item,"newQuantity", newQuantity)
     addToCart(mainOrderId, item, newQuantity); // 假設 mainOrderId 是這個組件的 prop 或從上層組件獲取
   };
 
   const handleSubtract = () => {
     const newQuantity = Math.max(0, quantity - 1);
     setQuantity(newQuantity);
-    onAddToCart(item, newQuantity);
+    console.log("mainOrderId", mainOrderId,"item", item,"newQuantity", newQuantity)
+    addToCart(mainOrderId, item, newQuantity);  // 確保這裡也使用 addToCart 來更新數量
   };
 
   return (

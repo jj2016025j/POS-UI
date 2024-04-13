@@ -1,3 +1,9 @@
+/**
+ * 有一個輸入框可以顯示及輸入金額
+ * 一個找零的欄位 左邊顯示找零 右邊顯示金額
+ * 一個自動輸入等於訂單總額的按鈕
+ * 然後下面是數字鍵跟 + - * / = 等按鍵
+ */
 import React, { useState } from 'react';
 import { evaluate } from 'mathjs';
 

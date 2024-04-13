@@ -1,3 +1,8 @@
+/**
+ * 取得訂單內容
+ * 顯示訂單內容V
+ * 提供送出訂單按鈕 送出成功會跳轉到首頁UNDO
+ */
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -11,28 +16,27 @@ function ConfirmSubOrder() {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const subOrderId = query.get('subOrderId');
-  const { cartItems } = useCart();
-  const itemsForCurrentTable = cartItems[mainOrderId] || []; // 假设mainOrderId用于标识不同的购物车
+  const { getOrderSummary } = useCart();
 
-  const totalAmount = itemsForCurrentTable.reduce((total, item) => total + item.quantity * item.Price, 0);
+  const orderSummary = getOrderSummary(mainOrderId);
 
   useEffect(() => {
 
   }, []);
 
   const handleSubmitOrder = () => {
-    const isConfirmed = window.confirm("确认提交订单吗?");
-    if (isConfirmed) {
-      console.log("发送订单请求", { mainOrderId, cartItems });
-      axios.post(`/order/SubOrder/${mainOrderId}`, { items: itemsForCurrentTable })
-        .then(() => {
-          alert("送出訂單成功")
-          history.push('/pos'); // 成功后导航回首页
-        })
-        .catch(error => {
-          console.error('Error fetching TableId:', error);
-        });
-    }
+    console.log("发送订单请求", { mainOrderId });
+    axios.post(`/order/SubOrder/${mainOrderId}`, { items: orderSummary.items })
+      .then(() => {
+        alert("送出訂單成功")
+        // history.push('/pos'); // 成功后导航回首页
+      })
+      .catch(error => {
+        console.error('Error fetching TableId:', error);
+      });
+    // const isConfirmed = window.confirm("确认提交订单吗?");
+    //     if (isConfirmed) {
+    //     }
   };
 
   return (
@@ -50,7 +54,7 @@ function ConfirmSubOrder() {
               <p>2024-04-12 18:54:06</p>
             </div>
             <hr />
-            {itemsForCurrentTable.map((item, index) => (
+            {orderSummary.items && orderSummary.items.length > 0 ? (orderSummary.items.map((item, index) => (
               <React.Fragment key={index}>
                 <div className='menu-list-item'>
                   <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
@@ -65,10 +69,10 @@ function ConfirmSubOrder() {
                 </div>
                 <hr />
               </React.Fragment>
-            ))}
+            ))) : (<></>)}
             <div className='text-space-between'>
               <p>總計</p>
-              <p>${totalAmount}</p>
+              <p>${orderSummary.total ? (orderSummary.total) : (0)}</p>
             </div>
           </div>
           <button className='send-order-button' onClick={handleSubmitOrder}>送出訂單</button>

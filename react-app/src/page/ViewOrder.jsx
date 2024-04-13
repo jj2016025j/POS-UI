@@ -1,26 +1,16 @@
 /**
  * 取得網址中的主訂單號
- * 發送"查詢主訂單及子訂單資訊"請求
+ * 取得該訂單內容 傳給主訂單及子訂單組件V
  * 
- * 顯示主訂單編號 桌號 建立時間
- * 主訂單內容總計
- * 小費總計 
- * 所有費用總計
+ * 前往結帳按鈕 跳轉至結帳畫面V
+ * 提供跳轉至點餐頁面的功能V
  * 
-  * 前往結帳按鈕 跳轉至結帳畫面
-  * 
- * 顯示所有子訂單
- * 子訂單編號 桌號 建立時間 訂單狀態
- * 所有子訂單內容顯示 每一個都要包含 圖片 名稱 價格 數量 總計 
- * 子訂單總計
+ * 以下還沒做UNDO
  * 
- * "前往點餐"按鈕
- * 跳轉至/order/:mainOrderId
- * 
+ * 取消訂單
  * 編輯訂單按鈕 讓所有訂單狀態為"待確認"的訂單的編輯或刪除按鈕顯示
  * 儲存變更按鈕 送出變更 會發送子訂單更新請求 會跳出成功或失敗的訊息
  * 取消編輯按鈕 讓所有編輯或刪除按鈕隱藏
- * 
  * 編輯及刪除按鈕預設隱藏
  */
 
@@ -31,22 +21,30 @@ import axios from 'axios';
 function ViewOrder() {
   const { mainOrderId } = useParams();
   const history = useHistory();
-  const [orderDetails, setOrderDetails] = useState({mainOrder: null, subOrders: []});
-
+  const [orderDetails, setOrderDetails] = useState({ mainOrder: null, subOrders: [] });
+  
   useEffect(() => {
     axios.get(`/order/getMainAndSubOrder/${mainOrderId}`)
       .then(response => {
         // 确保响应中包含mainOrder和subOrders，如果没有则设置为null或空数组
         setOrderDetails({
-          mainOrder: response.data.mainOrder || null, 
+          mainOrder: response.data.mainOrder || null,
           subOrders: response.data.subOrders || []
         });
       })
       .catch(error => {
         console.error("Error fetching order details:", error);
-        setOrderDetails({mainOrder: null, subOrders: []}); // 请求失败或找不到订单时的处理
+        setOrderDetails({ mainOrder: null, subOrders: [] }); // 请求失败或找不到订单时的处理
       });
   }, [mainOrderId]);
+
+    if (!orderDetails.mainOrder) {
+      return (
+        <React.Fragment>
+          <div>Loading......</div>
+        </React.Fragment>
+      );
+    }
 
   const goToCheckout = () => history.push(`/checkout/${mainOrderId}`);
   const goToOrderPage = () => history.push(`/order/${mainOrderId}`);
@@ -63,7 +61,6 @@ function ViewOrder() {
   if (!orderDetails.mainOrder) {
     return (
       <React.Fragment>
-        <h1>查看訂單 VIEW ORDER</h1>
         <div>Order Not Found</div>
       </React.Fragment>
     );
@@ -113,22 +110,16 @@ function ViewOrder() {
   );
 }
 
+export default ViewOrder;
 
 /**
-
-  * 
+ * 顯示主訂單編號 桌號 建立時間
+ * 主訂單內容總計
+ * 小費總計 
+ * 所有費用總計
+ * 
  * 顯示所有子訂單
- * 子訂單編號 建立時間 訂單狀態
+ * 子訂單編號 桌號 建立時間 訂單狀態
  * 所有子訂單內容顯示 每一個都要包含 圖片 名稱 價格 數量 總計 
  * 子訂單總計
- * 
- * "前往點餐"按鈕
- * 跳轉至/order/:mainOrderId
- * 
- * 編輯訂單按鈕 讓所有訂單狀態為"待確認"的訂單的編輯或刪除按鈕顯示
- * 儲存變更按鈕 送出變更 會發送子訂單更新請求 會跳出成功或失敗的訊息
- * 取消編輯按鈕 讓所有編輯或刪除按鈕隱藏
- * 
- * 編輯及刪除按鈕預設隱藏
  */
-export default ViewOrder;
