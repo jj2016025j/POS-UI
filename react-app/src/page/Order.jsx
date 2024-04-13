@@ -5,13 +5,10 @@
  */
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'; // 引入useParams
 import MenuItem from '../components/MenuItem';
 
 function Menu() {
-    const { mainOrderId } = useParams(); // 从URL获取mainOrderId
     const [menuData, setMenuData] = useState({ categories: [], menuItems: [] });
-    const [SubOrderInfo, setCartItems] = useState([]);
     const categoryRefs = useRef({});
 
     useEffect(() => {

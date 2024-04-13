@@ -3,14 +3,12 @@
  * 顯示訂單內容V
  * 提供送出訂單按鈕 送出成功會跳轉到首頁UNDO
  */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../contexts/CartContext';
 
 function ConfirmSubOrder() {
-  const [table, setTable] = useState(null);
-  const tableNumber = table ? table.TableNumber : null;
   const history = useHistory();
   const { mainOrderId } = useParams();
   const location = useLocation();

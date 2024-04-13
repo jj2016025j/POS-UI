@@ -1,6 +1,8 @@
 /**
  * 取得品項並依照分類顯示V
  * 點擊品項+-號會呼叫usecontext幫忙改變購物車內容V
+ * 
+ * 要讀取購物車情況顯示數量UNDO
  */
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';

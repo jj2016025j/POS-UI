@@ -39,7 +39,7 @@ export const CartProvider = ({ children }) => {
             let itemsForTable = prevItems[mainOrderId]?.items || [];
             console.log("itemsForTable", itemsForTable.map(item => `${item.Id} (${typeof item.Id})`));
             // console.log("newItem", `${newItem.Id} (${typeof newItem.Id})`);
-            const existItemIndex = itemsForTable.findIndex(item => item.Id == newItem.Id);
+            const existItemIndex = itemsForTable.findIndex(item => item.Id === newItem.Id);
             console.log("找到位置", existItemIndex)
             if (existItemIndex > -1) {
                 if (newQuantity > 0) {

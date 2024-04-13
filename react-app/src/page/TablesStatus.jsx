@@ -26,10 +26,6 @@ function TablesStatus() {
         ));
     };
 
-    const updateTables = (updatedInfo) => {
-        setTables(updatedInfo);
-    };
-
     return (
         <div className='wrap'>
             {tables.map(table => (

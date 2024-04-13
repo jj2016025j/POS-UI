@@ -1,12 +1,13 @@
 /**
  * 顯示訂單金額
- * 提供現金結帳按鈕UNDO
+ * 提供現金結帳按鈕V
  * LINE PAY按鈕UNDO
  * 信勇卡支付按鈕UNDO
  * 跳轉置查看訂單功能V
  * 
  * 找零功能顯示
  * 
+ * 送出訂單要清空購物車UNDO
  */
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
@@ -17,22 +18,14 @@ function Confirmpayment() {
   let { mainOrderId } = useParams();
   const history = useHistory();
   const [orderDetails, setOrderDetails] = useState(null);
-  const [inputAmount, setInputAmount] = useState('');
-  const [change, setChange] = useState(0);
 
   useEffect(() => {
-    // 假设的API请求URL，请根据实际情况调整
     axios.get(`/order/getMainOrder/${mainOrderId}`)
       .then(response => {
         setOrderDetails(response.data);
       })
       .catch(error => console.error("Error fetching order details:", error));
   }, [mainOrderId]);
-
-  // 這裡要顯示是或否
-  // 選擇是就會跳結帳成功
-  // 然後按下確認或是等三秒就會返回首頁
-  // 发送结账请求的逻辑
 
   const handleViewOrder = () => {
     history.push(`/vieworder/${mainOrderId}`);
