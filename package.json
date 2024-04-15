@@ -1,6 +1,6 @@
 {
   "proxy": "http://localhost:8080",
-  "name": "react-app",
+  "name": "POS-UI",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,8 +27,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "POS-UI",
+      "POS-UI/jest"
     ]
   },
   "browserslist": {
