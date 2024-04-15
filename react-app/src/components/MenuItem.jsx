@@ -1,24 +1,30 @@
+/**
+ * 取得品項並依照分類顯示V
+ * 點擊品項+-號會呼叫usecontext幫忙改變購物車內容V
+ * 
+ * 要讀取購物車情況顯示數量UNDO
+ */
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 
 function MenuItem({ item }) {
-  const { mainOrderId } = useParams();
   const [quantity, setQuantity] = useState(0);
-  const { updateTableOrder } = useCart();
+  const { addToCart } = useCart();
+  const { mainOrderId } = useParams();
 
   const handleAdd = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
-    updateTableOrder(mainOrderId, item, newQuantity);
+    console.log("mainOrderId", mainOrderId, "item", item, "newQuantity", newQuantity)
+    addToCart(mainOrderId, item, newQuantity);
   };
 
   const handleSubtract = () => {
-    if (quantity > 0) { // 确保商品数量大于0时才执行减少操作
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      updateTableOrder(mainOrderId, item, newQuantity);
-    }
+    const newQuantity = Math.max(0, quantity - 1);
+    setQuantity(newQuantity);
+    console.log("mainOrderId", mainOrderId, "item", item, "newQuantity", newQuantity)
+    addToCart(mainOrderId, item, newQuantity);
   };
 
   return (
@@ -31,12 +37,13 @@ function MenuItem({ item }) {
         </div>
       </div>
       <div className='horizontally'>
-        <button className='order-button' onClick={handleSubtract} disabled={quantity <= 0}>-</button> {/* 禁用减号按钮当数量为零 */}
+        <button className='order-button' onClick={handleSubtract}>-</button>
         <span>{quantity}</span>
         <button className='order-button' onClick={handleAdd}>+</button>
       </div>
     </div>
   );
 }
+
 
 export default MenuItem;

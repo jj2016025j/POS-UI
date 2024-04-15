@@ -1,73 +1,86 @@
+/**
+ * 取得localstorage內資料V
+ * 提供增減各桌購物車內商品的數量的功能，並在數量為0時移除V
+ * 在改動購物車時自動計算總額並更新V
+ * 每次更動購物車都要儲存到localstorageV
+ */
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const TablesContext = createContext();
+const CartContext = createContext();
 
-export const useCart = () => useContext(TablesContext);
+export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [TablesInfo, setTablesInfo] = useState({ tables: [] });
-    console.log("TablesInfo", TablesInfo);
+    const [SubOrderInfo, setCartItems] = useState({});
 
     useEffect(() => {
-        const storedTablesInfo = JSON.parse(localStorage.getItem('TablesInfo'));
-        if (storedTablesInfo) {
-            setTablesInfo(storedTablesInfo);
+        const storedCartItems = JSON.parse(localStorage.getItem('SubOrderInfo'));
+        if (storedCartItems) {
+            setCartItems(storedCartItems);
         }
     }, []);
 
+    // 购物车数据有更新时，同步到 localStorage
     useEffect(() => {
-        localStorage.setItem('TablesInfo', JSON.stringify(TablesInfo));
-    }, [TablesInfo]);
+        console.log("SubOrderInfo", SubOrderInfo);
+        localStorage.setItem('SubOrderInfo', JSON.stringify(SubOrderInfo));
+    }, [SubOrderInfo]);
 
-    const updateTableOrder = (tableId, item, quantity) => {
-        setTablesInfo(prevTablesInfo => {
-            let itemsForTable = prevTablesInfo[tableId]?.items || [];
-            const existingItemIndex = itemsForTable.findIndex(existingItem => existingItem.Id === item.Id);
+    const updateCartSummary = (itemsForTable) => {
+        const total = itemsForTable.reduce((total, item) => total + item.quantity * item.Price, 0);
 
-            if (existingItemIndex > -1) {
-                // 如果品项存在且新数量为0，则移除该品项
-                if (quantity === 0) {
-                    itemsForTable = itemsForTable.filter((_, index) => index !== existingItemIndex);
-                } else {
-                    // 更新品项数量
-                    itemsForTable = itemsForTable.map((currentItem, index) =>
-                        index === existingItemIndex ? { ...currentItem, quantity: quantity } : currentItem
+        return {
+            total
+        };
+    };
+
+    const addToCart = (mainOrderId, newItem, newQuantity) => {
+        setCartItems(prevItems => {
+            let itemsForTable = prevItems[mainOrderId]?.items || [];
+            console.log("itemsForTable", itemsForTable.map(item => `${item.Id} (${typeof item.Id})`));
+            // console.log("newItem", `${newItem.Id} (${typeof newItem.Id})`);
+            const existItemIndex = itemsForTable.findIndex(item => item.Id === newItem.Id);
+            console.log("找到位置", existItemIndex)
+            if (existItemIndex > -1) {
+                if (newQuantity > 0) {
+                    console.log("更新數量", newQuantity)
+                    itemsForTable = itemsForTable.map((item, index) =>
+                        index === existItemIndex ? { ...item, quantity: newQuantity } : item
                     );
+                } else {
+                    console.log("移除該商品", newQuantity)
+
+                    itemsForTable = itemsForTable.filter((item, index) => index !== existItemIndex);
                 }
+            } else if (newQuantity > 0) {
+                console.log("添加新商品", newQuantity)
+                itemsForTable = [...itemsForTable, { ...newItem, quantity: newQuantity }];
             } else {
-                // 新增品项
-                itemsForTable = [...itemsForTable, { ...item, quantity: quantity }];
+                console.log("不知道做了甚麼")
             }
+            console.log("itemsForTable", itemsForTable.map(item => `${item.Id} (${typeof item.Id})`));
 
-            // 更新后的桌子订单
-            const updatedTableOrder = { items: itemsForTable };
+            const updatedTableInfo = updateCartSummary(itemsForTable);
+            console.log("updatedTableInfo", updatedTableInfo);
 
-            // 计算订单摘要
-            const { subtotal, serviceFee, total } = calculateOrderSummary(tableId, itemsForTable);
-
-            // 将订单摘要信息加入到桌子订单中
-            updatedTableOrder.summary = { subtotal, serviceFee, total };
-
-            // 更新TablesInfo
-            const updatedTablesInfo = { ...prevTablesInfo, [tableId]: updatedTableOrder };
-            localStorage.setItem('TablesInfo', JSON.stringify(updatedTablesInfo));
-
-            return updatedTablesInfo;
+            return {
+                ...prevItems,
+                [mainOrderId]: {
+                    ...prevItems[mainOrderId],
+                    items: itemsForTable,
+                    ...updatedTableInfo
+                }
+            };
         });
     };
 
-    // 修改 calculateOrderSummary 接受 items 参数，直接计算而非从 TablesInfo 获取
-    const calculateOrderSummary = (tableId, itemsForTable) => {
-        const subtotal = itemsForTable.reduce((total, { quantity, Price }) => total + (quantity * Price), 0);
-        const SERVICE_FEE_RATE = 0.1; // 服務費率
-        const serviceFee = subtotal * SERVICE_FEE_RATE;
-        const totalAmount = subtotal + serviceFee;
-
-        return { subtotal, serviceFee, total: totalAmount };
+    const getSubOrderInfo = (mainOrderId) => {
+        return SubOrderInfo[mainOrderId] || {};
     };
 
+
     return (
-        <TablesContext.Provider value={{ TablesInfo, updateTableOrder, calculateOrderSummary }}>
+        <CartContext.Provider value={{ SubOrderInfo, addToCart, getSubOrderInfo }}>
             {children}
-        </TablesContext.Provider>);
+        </CartContext.Provider>);
 };

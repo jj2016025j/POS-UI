@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import PosHome from './page/PosHome';
+import TablesStatus from './page/TablesStatus';
 import Order from './page/Order';
 import ViewOrder from './page/ViewOrder';
 import ConfirmSubOrder from './page/ConfirmSubOrder';
@@ -34,7 +34,7 @@ function App() {
                         <Title />
                         <Switch>
                             <Redirect exact from={`/`} to={`/pos`} />
-                            <Route exact path={`/pos`} component={PosHome} />
+                            <Route exact path={`/pos`} component={TablesStatus} />
                             <Route path={`/order/:mainOrderId`} component={Order} />
                             <Route path={`/vieworder/:mainOrderId`} component={ViewOrder} />
                             <Route path={`/confirmsuborder/:mainOrderId`} component={ConfirmSubOrder} />
@@ -61,3 +61,8 @@ function App() {
 }
 
 export default App;
+
+/**
+ * 根據網址改變內容
+ * 切分為導行列、主要內容、側邊攔
+ */

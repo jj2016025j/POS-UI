@@ -1,29 +1,31 @@
+/**
+ * 顯示訂單金額
+ * 提供現金結帳按鈕V
+ * LINE PAY按鈕UNDO
+ * 信勇卡支付按鈕UNDO
+ * 跳轉置查看訂單功能V
+ * 
+ * 找零功能顯示
+ * 
+ * 送出訂單要清空購物車UNDO
+ */
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Calculator from '../components/Calculator';
 
-
 function Confirmpayment() {
   let { mainOrderId } = useParams();
   const history = useHistory();
   const [orderDetails, setOrderDetails] = useState(null);
-  const [inputAmount, setInputAmount] = useState('');
-  const [change, setChange] = useState(0);
 
   useEffect(() => {
-    // 假设的API请求URL，请根据实际情况调整
     axios.get(`/order/getMainOrder/${mainOrderId}`)
       .then(response => {
         setOrderDetails(response.data);
       })
       .catch(error => console.error("Error fetching order details:", error));
   }, [mainOrderId]);
-
-  // 這裡要顯示是或否
-  // 選擇是就會跳結帳成功
-  // 然後按下確認或是等三秒就會返回首頁
-  // 发送结账请求的逻辑
 
   const handleViewOrder = () => {
     history.push(`/vieworder/${mainOrderId}`);
@@ -90,24 +92,3 @@ function Confirmpayment() {
 }
 
 export default Confirmpayment;
-
-/**
- * 取得主訂單 by id
- * 顯示訂單編號 創建時間
- * 桌號
- * subtotal
- * tax
- * total
- * 查看訂單按鈕 返回查看訂單頁面
- * 
- * 信用卡支付按鈕 (目前設為不啟用)
- * line pay 按鈕 按下後會顯示"請前往確認LINE PAY商家端是否收到正確金額" 按下是會發送結帳請求
- * 現金結帳按鈕 會發送現金結帳請求
- * 以上結帳功能成功後會跳出結帳成功通知 按下確認會跳轉至首頁 或是預設三秒後會跳轉
- * 
- * 下面做一個簡易的計算機
- * 有一個輸入框可以顯示及輸入金額
- * 一個找零的欄位 左邊顯示找零 右邊顯示金額
- * 一個自動輸入等於訂單總額的按鈕
- * 然後下面是數字鍵跟 + - * / = 等按鍵
- */
