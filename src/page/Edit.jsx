@@ -7,7 +7,7 @@ function ItemEdit() {
     const [editingItem, setEditingItem] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/menu')
+        axios.get('/menu')
             .then(response => {
                 setMenuData(response.data);
             })
@@ -23,7 +23,7 @@ function ItemEdit() {
 
     const handleDelete = (itemId) => {
         if (window.confirm("确定要删除这个菜单项吗？")) {
-            axios.delete(`http://localhost:8080/menu/items/${itemId}`)
+            axios.delete(`/menu/items/${itemId}`)
                 .then(() => {
                     // 提示删除成功并重新加载数据或移除该项
                     alert("菜单项删除成功");

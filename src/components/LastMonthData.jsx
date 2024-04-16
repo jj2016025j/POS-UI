@@ -7,7 +7,7 @@ function LastMonthData() {
   const [sellData, setSellData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/data/lastMonth')
+    fetch('/data/lastMonth')
       .then(response => response.json())
       .then(data => setSellData(data))
       .catch(error => console.error('Error fetching data:', error));

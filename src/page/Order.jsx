@@ -12,7 +12,7 @@ function Menu() {
     const categoryRefs = useRef({});
 
     useEffect(() => {
-        axios.get('http://localhost:8080/menu')
+        axios.get('/menu')
             .then(response => {
                 setMenuData(response.data);
                 categoryRefs.current = response.data.categories.reduce((acc, category) => {

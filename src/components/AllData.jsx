@@ -17,7 +17,7 @@ function AllData() {
   const [sellData, setSellData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/data/all')
+    fetch('/data/all')
       .then(response => response.json())
       .then(data => setSellData(data))
       .catch(error => console.error('Error fetching data:', error));
