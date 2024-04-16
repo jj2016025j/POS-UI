@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import TablesStatus from './page/TablesStatus';
-import Order from './page/Order';
+import Menu from './page/Menu';
 import ViewOrder from './page/ViewOrder';
 import ConfirmSubOrder from './page/ConfirmSubOrder';
 import PhoneOrder from './page/PhoneOrder';
@@ -35,7 +35,7 @@ function App() {
                         <Switch>
                             <Redirect exact from={`/`} to={`/pos`} />
                             <Route exact path={`/pos`} component={TablesStatus} />
-                            <Route path={`/order/:mainOrderId`} component={Order} />
+                            <Route path={`/order/:mainOrderId`} component={Menu} />
                             <Route path={`/vieworder/:mainOrderId`} component={ViewOrder} />
                             <Route path={`/confirmsuborder/:mainOrderId`} component={ConfirmSubOrder} />
                             <Route path={`/phoneorder/:mainOrderId`} component={PhoneOrder} />

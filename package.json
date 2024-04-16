@@ -28,9 +28,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "eslint:recommended",
-      "POS-UI",
-      "POS-UI/jest"
+      "react-app",
+      "eslint:recommended"
     ]
   },
   "browserslist": {

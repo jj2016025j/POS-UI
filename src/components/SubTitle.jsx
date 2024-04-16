@@ -18,6 +18,7 @@ const SubTitle = () => {
                 break;
             case '/editMenuItem':
                 title = '品項編輯 EDIT';
+                break;
             default:
                 title = '發生錯誤 ERROR'; // 當路徑不匹配時顯示預設標題
                 break;
