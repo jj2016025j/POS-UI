@@ -1,11 +1,15 @@
 import React from 'react';
+import Title from '../components/Title';
 
 function PhoneConfirmorder() {
 
   return (
-    <div>
-      <h1>PhoneConfirmorder</h1>
-    </div>
+    <React.Fragment>
+      <Title />
+      <div>
+        <h1>PhoneCompleteOrder</h1>
+      </div>
+    </React.Fragment>
   );
 }
 

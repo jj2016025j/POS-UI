@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Table from '../components/Table';
+import Title from '../components/Title';
 
 function TablesStatus() {
     const [tables, setTables] = useState([]);
@@ -27,11 +28,14 @@ function TablesStatus() {
     };
 
     return (
-        <div className='wrap'>
-            {tables.map(table => (
-                <Table key={table.Id} table={table} updateTable={updateTable} updateTables={fetchTables} />
-            ))}
-        </div>
+        <React.Fragment>
+            <Title />
+            <div className='wrap'>
+                {tables.map(table => (
+                    <Table key={table.Id} table={table} updateTable={updateTable} updateTables={fetchTables} />
+                ))}
+            </div>
+        </React.Fragment>
     );
 }
 

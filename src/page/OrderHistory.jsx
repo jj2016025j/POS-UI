@@ -9,6 +9,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import Title from '../components/Title';
 
 function OrderHistory() {
   const [orders, setOrders] = useState([]);
@@ -31,6 +32,7 @@ function OrderHistory() {
 
   return (
     <React.Fragment>
+      <Title />
       <div className='function'>
         <div className='wrap'>
           {orders.map(order => (

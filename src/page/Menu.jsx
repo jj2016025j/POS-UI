@@ -7,6 +7,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import MenuItem from '../components/MenuItem';
 import Categories from '../components/Categories';
+import Title from '../components/Title';
 
 function Menu() {
     const [menuData, setMenuData] = useState({ categories: [], menuItems: [] });
@@ -33,6 +34,7 @@ function Menu() {
 
     return (
         <React.Fragment>
+            <Title />
             <Categories menuData={menuData} scrollToCategory={scrollToCategory} categoryRefs={categoryRefs} />
             <div className='function'>
                 <div className='menu'>

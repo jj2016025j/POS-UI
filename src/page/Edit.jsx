@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import EditMenuItem from '../components/EditMenuItem';
 import Categories from '../components/Categories';
+import Title from '../components/Title';
 
 function ItemEdit() {
     const [menuData, setMenuData] = useState({ categories: [], menuItems: [] });
@@ -29,7 +30,7 @@ function ItemEdit() {
     };
 
     const handleAddNewItem = () => {
-        // 设置一个新的空白菜单项以开始添加
+        // 刷新成空白編輯區域
         console.log("Adding new item");
         // 这里应该包含实际的添加新项逻辑
         setEditingItem({ MenuItemName: "", Price: "", CategoryId: "", image_url: "" });
@@ -37,6 +38,7 @@ function ItemEdit() {
 
     return (
         <React.Fragment>
+            <Title />
             <Categories menuData={menuData} scrollToCategory={scrollToCategory} categoryRefs={categoryRefs} />
             <button onClick={handleAddNewItem}>新增品项</button>
             <div className='function'>

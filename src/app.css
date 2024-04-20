@@ -1,5 +1,5 @@
 * {
-    /* border: 1px solid rgb(156, 130, 76); */
+    border: 1px solid rgb(156, 130, 76);
     margin: 0;
     padding: 0;
     font-family: "Segoe UI";
@@ -10,37 +10,15 @@
     color: #000;
 }
 
-nav,
-aside,
-.category {
-    background-color: #FFF;
-    display: flex;
-}
-
 html,
 body,
 .myBody {
     background-color: #F6F4F0;
     display: flex;
-}
-
-
-nav,
-aside,
-.table,
-.category,
-.menuItem,
-.history-order {
-    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
-}
-
-html,
-body,
-.myBody {
     display: flex;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 nav {
@@ -53,8 +31,13 @@ nav {
     gap: 20px;
     flex-shrink: 0;
     z-index: 100;
+    background-color: #FFF;
+    display: flex;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
+
 }
 
+/* 中間主要功能區 */
 section {
     display: flex;
     width: 100%;
@@ -68,6 +51,7 @@ section {
     overflow: hidden;
 }
 
+/* 購物車及編輯品項區 */
 aside {
     /* padding: 30px; */
     display: flex;
@@ -80,8 +64,12 @@ aside {
     gap: 20px;
     flex-shrink: 0;
     z-index: 100;
+    background-color: #FFF;
+    display: flex;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
 }
 
+/* 導航欄的各個連結群組 */
 .nav-link-list {
     display: flex;
     flex-direction: column;
@@ -89,8 +77,8 @@ aside {
     align-self: center;
 }
 
-.nav-link,
-.category {
+/* 導航欄連結、好像還有分類用的連結 */
+.nav-link {
     display: flex;
     width: 70px;
     height: 70px;
@@ -101,14 +89,25 @@ aside {
     align-items: center;
 }
 
-.category {
-    border-radius: 20px;
-}
-
 .nav-link:link,
 .nav-link:visited {
     color: rgb(0, 0, 0);
     text-decoration: none;
+}
+
+/* 分類 */
+.category {
+    display: flex;
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    flex: 0 0 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #FFF;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
 }
 
 .nav-link:hover,
@@ -117,6 +116,7 @@ aside {
     background-color: rgb(206, 206, 206);
 }
 
+/* 標題群組 */
 .title-group {
     display: flex;
     padding: 30px;
@@ -125,9 +125,9 @@ aside {
     gap: 30px;
     /* background-color: #FFF;
     z-index: 30; */
-
 }
 
+/* 分類群組 */
 .categories {
     display: flex;
     padding: 30px;
@@ -139,6 +139,7 @@ aside {
     z-index: 30; */
 }
 
+/* 各功能區域 */
 .function {
     display: flex;
     flex-direction: column;
@@ -153,6 +154,7 @@ aside {
     overflow-y: scroll;
 }
 
+/* 菜單群組 */
 .menu {
     display: flex;
     flex-direction: column;
@@ -163,6 +165,7 @@ aside {
     align-self: stretch;
 }
 
+/* 菜單各分類 */
 .menu-item-list {
     padding: 0px 10px;
     display: flex;
@@ -174,7 +177,10 @@ aside {
     flex-wrap: wrap;
 }
 
+/* 品項 */
 .menuItem {
+    width: 175px;
+    height: 150px;
     padding: 10px;
     gap: 5px;
     display: flex;
@@ -182,8 +188,10 @@ aside {
     align-self: stretch;
     border-radius: 20px;
     background: #FFF;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
 }
 
+/* 不知道 */
 .order-button {
     width: 30px;
     height: 30px;
@@ -198,6 +206,7 @@ aside {
     cursor: pointer
 }
 
+/* 桌號 */
 .table {
     width: 200px;
     /* height: 200px; */
@@ -208,8 +217,10 @@ aside {
     align-self: stretch;
     border-radius: 20px;
     background: #FFF;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
 }
 
+/* 調整桌號及狀態顯示 */
 .tablenumber-tablestatus {
     display: flex;
     justify-content: center;
@@ -217,6 +228,7 @@ aside {
     width: 100%;
 }
 
+/* 桌號顯示 */
 .table-number {
     font-size: 48px;
     /* 或者其他你想要的大小 */
@@ -229,6 +241,7 @@ aside {
     margin: auto;
 }
 
+/* 桌號按鈕 */
 .table-button {
     background: #FFF;
     color: #000;
@@ -269,12 +282,14 @@ aside {
     background-color: red;
 }
 
+/* 分隔線 */
 hr {
     background: #E2CF9D;
     color: #E2CF9D;
     border: 1px solid #E2CF9D;
 }
 
+/* 訂單歷史裡面的每一張訂單簡介 */
 .history-order {
     padding: 15px;
     display: flex;
@@ -286,20 +301,10 @@ hr {
     background: #FFF;
     width: 500px;
     height: 50px;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
 }
 
-.menuItem {
-    padding: 10px;
-    gap: 5px;
-    display: flex;
-    flex-direction: column;
-    align-self: stretch;
-    border-radius: 20px;
-    background: #FFF;
-    width: 175px;
-    height: 150px;
-}
-
+/* 超過後往下排 */
 .wrap {
     display: flex;
     flex-wrap: wrap;
@@ -309,33 +314,7 @@ hr {
     align-self: stretch;
 }
 
-.horizontally {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 30px;
-    align-self: stretch;
-}
-
-.vertically {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 30px;
-    align-self: stretch;
-    flex-wrap: wrap;
-}
-
-.text-space-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-}
-
+/* 購物車內容清單 */
 .cart-list-group {
     display: flex;
     padding: 30px;
@@ -346,6 +325,7 @@ hr {
     align-self: stretch;
 }
 
+/* 購物車標題 */
 .cart-total-group {
     display: flex;
     padding: 30px;
@@ -358,6 +338,7 @@ hr {
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.25);
 }
 
+/* 確認按鈕 */
 .confirm-order-button {
     display: flex;
     padding: 10px 0px;
@@ -372,6 +353,7 @@ hr {
     border: 0px none rgba(255, 255, 255, 0);
 }
 
+/* ??? */
 .outside {
     display: flex;
     /* padding: 30px; */
@@ -382,6 +364,7 @@ hr {
     align-self: stretch;
 }
 
+/* 確認子訂單頁面 訂單跟確認按鈕的群組 */
 .comfirm-order-group {
     display: flex;
     min-width: 600px;
@@ -393,12 +376,79 @@ hr {
     gap: 30px;
 }
 
+/* 查看訂單的主訂單資訊及功能按鈕區 */
+.main-order-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+}
+
+/* 主訂單資訊 */
+.main-order {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.go-to-order,
+.edit-order,
+.cancel-order,
+.to-checkout {
+    display: flex;
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.25);
+}
+
+.go-to-order {
+    background: #5F4500;
+}
+
+.edit-order {
+    background: #887239;
+}
+
+.cancel-order {
+    background: #B58C24;
+}
+
+.to-checkout {
+    background: #B58C24;
+}
+
+/* 超過後往下排 */
+.sub-orders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+}
+
+/* 子訂單資訊 */
 .sub-order {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
     width: 100%;
+    max-width: 400px;
     padding: 10px;
     gap: 10px;
     border-radius: 20px;
@@ -476,6 +526,17 @@ hr {
 
 .credit-card {
     background: #4888AC;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-content: stretch;
+    width: 100%;
+    gap: 30px;
+    align-self: stretch;
+    flex-wrap: wrap;
 }
 
 .calculator {
@@ -579,6 +640,34 @@ li p {
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
+}
+
+.horizontally {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+}
+
+.vertically {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    gap: 30px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.text-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
 }
 
 /* .table p {

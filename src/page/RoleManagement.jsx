@@ -1,10 +1,12 @@
 import React from 'react';
+import Title from '../components/Title';
 
 function RoleManagement() {
 
   return (
-    <div>
-    </div>
+    <React.Fragment>
+      <Title />
+    </React.Fragment >
   );
 }
 

@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../contexts/CartContext';
+import Title from '../components/Title';
 
 function ConfirmSubOrder() {
   const history = useHistory();
@@ -16,15 +17,15 @@ function ConfirmSubOrder() {
   const subOrderId = query.get('subOrderId');
   const { getSubOrderInfo } = useCart();
 
-  const SubOrderInfo = getSubOrderInfo(mainOrderId);
-
+  const subOrder = getSubOrderInfo(mainOrderId);
+  subOrder.subOrderId = subOrderId
   useEffect(() => {
 
   }, []);
 
   const handleSubmitOrder = () => {
-    console.log("发送订单请求", subOrderId, SubOrderInfo);
-    axios.post(`/order/SubOrder/${subOrderId}`, { SubOrderInfo: SubOrderInfo })
+    console.log("发送订单请求", subOrderId, subOrder);
+    axios.post(`/order/subOrder/${subOrderId}`, { subOrder: subOrder })
       .then(() => {
         alert("送出訂單成功")
         history.push('/pos'); // 成功后导航回首页
@@ -38,45 +39,48 @@ function ConfirmSubOrder() {
   };
 
   return (
-    <div className='function'>
-      <div className="outside">
-        <div className="comfirm-order-group">
-          <div className="sub-order">
-            <div className="text-space-between">
-              <p>子訂單編號: {subOrderId}</p>
-            </div>
-            <div className="text-space-between">
-              <p>桌號: </p>
-            </div>
-            <div className="text-space-between">
-              <p>2024-04-12 18:54:06</p>
-            </div>
-            <hr />
-            {SubOrderInfo.items && SubOrderInfo.items.length > 0 ? (SubOrderInfo.items.map((item, index) => (
-              <React.Fragment key={index}>
-                <div className='menu-list-item'>
-                  <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
-                  <div className='menu-item-info'>
-                    <p>{item.MenuItemName}</p>
-                    <div className='text-space-between'>
-                      <p>{item.quantity} </p>
-                      <p>${item.Price}</p>
-                      <p>${item.quantity * item.Price}</p>
+    <React.Fragment>
+      <Title />
+      <div className='function'>
+        <div className="outside">
+          <div className="comfirm-order-group">
+            <div className="sub-order">
+              <div className="text-space-between">
+                <p>子訂單編號: {subOrder.subOrderId}</p>
+                <p>2024-04-12 18:54:06</p>
+              </div>
+              {subOrder.OrderStatu != null ? (<p>訂單狀態：{subOrder.OrderStatus}</p>) : (<></>)}
+              <p>訂單狀態：{subOrder.OrderStatus}</p>
+              <div className="text-space-between">
+                <p>桌號: </p>
+              </div>
+              <div className='text-space-between'>
+                <p>總計</p>
+                <p>${subOrder.total ? (subOrder.total) : (0)}</p>
+              </div>
+              <hr />
+              {subOrder.items && subOrder.items.length > 0 ? (subOrder.items.map((item, index) => (
+                <React.Fragment key={index}>
+                  <div className='menu-list-item'>
+                    <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
+                    <div className='menu-item-info'>
+                      <p>{item.MenuItemName}</p>
+                      <div className='text-space-between'>
+                        <p>{item.quantity} </p>
+                        <p>${item.Price}</p>
+                        <p>${item.quantity * item.Price}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <hr />
-              </React.Fragment>
-            ))) : (<></>)}
-            <div className='text-space-between'>
-              <p>總計</p>
-              <p>${SubOrderInfo.total ? (SubOrderInfo.total) : (0)}</p>
+                  <hr />
+                </React.Fragment>
+              ))) : (<></>)}
             </div>
+            <button className='send-order-button' onClick={handleSubmitOrder}>送出訂單</button>
           </div>
-          <button className='send-order-button' onClick={handleSubmitOrder}>送出訂單</button>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 

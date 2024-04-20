@@ -13,6 +13,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Calculator from '../components/Calculator';
+import Title from '../components/Title';
 
 function Confirmpayment() {
   let { mainOrderId } = useParams();
@@ -56,38 +57,41 @@ function Confirmpayment() {
   };
 
   return (
-    <div className='checkout-funtion'>
-      <div className='sub-order'>
-        {orderDetails ? (
-          <>
-            <div className="text-space-between">
-              <p>Trade Number: {mainOrderId}</p>
-              <p>{new Date(orderDetails.CreateTime).toLocaleString()}</p>
-            </div>
-            <p>桌號: {orderDetails.TableId}</p>
-            <p>訂單加總: ${orderDetails.SubTotal}</p>
-            <p>小費: ${orderDetails.ServiceFee}</p>
-            <p>總金額: ${orderDetails.Total}</p>
-          </>
-        ) : (
-          <>
-            <div className="text-space-between">
-              <p>Trade Number: 無此訂單</p>
-              <p>{new Date().toLocaleString()}</p>
-            </div>
-            <p>桌號: 無</p>
-            <p>訂單加總: 無</p>
-            <p>小費: 無</p>
-            <p>總金額: 無</p>
-          </>
-        )}
-        <button className='cash-payment' onClick={handleCashPayment}>現金結帳</button>
-        <button className='lind-pay' onClick={handleLinePay}>LINE PAY</button>
-        <button className='credit-card' disabled>信用卡支付</button>
-        <button className='cash-payment' onClick={handleViewOrder}>查看訂單</button>
+    <React.Fragment>
+      <Title />
+      <div className='checkout-funtion'>
+        <div className='sub-order'>
+          {orderDetails ? (
+            <>
+              <div className="text-space-between">
+                <p>Trade Number: {mainOrderId}</p>
+                <p>{new Date(orderDetails.CreateTime).toLocaleString()}</p>
+              </div>
+              <p>桌號: {orderDetails.TableId}</p>
+              <p>訂單加總: ${orderDetails.SubTotal}</p>
+              <p>小費: ${orderDetails.ServiceFee}</p>
+              <p>總金額: ${orderDetails.Total}</p>
+            </>
+          ) : (
+            <>
+              <div className="text-space-between">
+                <p>Trade Number: 無此訂單</p>
+                <p>{new Date().toLocaleString()}</p>
+              </div>
+              <p>桌號: 無</p>
+              <p>訂單加總: 無</p>
+              <p>小費: 無</p>
+              <p>總金額: 無</p>
+            </>
+          )}
+          <button className='cash-payment' onClick={handleCashPayment}>現金結帳</button>
+          <button className='lind-pay' onClick={handleLinePay}>LINE PAY</button>
+          <button className='credit-card' disabled>信用卡支付</button>
+          <button className='cash-payment' onClick={handleViewOrder}>查看訂單</button>
+        </div>
+        <Calculator />
       </div>
-      <Calculator />
-    </div>
+    </React.Fragment>
   );
 }
 

@@ -17,12 +17,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Title from '../components/Title';
 
 function ViewOrder() {
   const { mainOrderId } = useParams();
   const history = useHistory();
   const [orderDetails, setOrderDetails] = useState({ mainOrder: null, subOrders: [] });
-  
+
   useEffect(() => {
     axios.get(`/order/getMainAndSubOrder/${mainOrderId}`)
       .then(response => {
@@ -38,13 +39,14 @@ function ViewOrder() {
       });
   }, [mainOrderId]);
 
-    if (!orderDetails.mainOrder) {
-      return (
-        <React.Fragment>
-          <div>Loading......</div>
-        </React.Fragment>
-      );
-    }
+  if (!orderDetails.mainOrder) {
+    return (
+      <React.Fragment>
+        <Title />
+        <div>Loading......</div>
+      </React.Fragment>
+    );
+  }
 
   const goToCheckout = () => history.push(`/checkout/${mainOrderId}`);
   const goToOrderPage = () => history.push(`/order/${mainOrderId}`);
@@ -61,52 +63,80 @@ function ViewOrder() {
   if (!orderDetails.mainOrder) {
     return (
       <React.Fragment>
+        <Title />
         <div>Order Not Found</div>
       </React.Fragment>
     );
   }
 
   return (
-    <div>
-      <div>
-        <h2>Main Order</h2>
-        <p>Order Number: {orderDetails.mainOrder.MainOrderId}</p>
-        <p>Table Number: {orderDetails.mainOrder.TableId}</p>
-        <p>Creation Time: {orderDetails.mainOrder.CreateTime}</p>
-        <p>Subtotal: ${orderDetails.mainOrder.SubTotal}</p>
-        <p>Service Fee: ${orderDetails.mainOrder.ServiceFee}</p>
-        <p>Total: ${orderDetails.mainOrder.Total}</p>
-        <button onClick={goToCheckout}>前往結帳</button>
-        <button onClick={goToOrderPage}>前往點餐</button>
-        <button onClick={goToOrderPage}>取消此訂單</button>
-      </div>
-      <div>
-        <h2>Sub Orders</h2>
-        {orderDetails && orderDetails.subOrders.map(subOrder => (
-          <div key={subOrder.SubOrderId}>
-            <p>Sub Order Number: {subOrder.SubOrderId}</p>
-            <p>Status: {subOrder.OrderStatus}</p>
-            <p>Creation Time: {subOrder.CreateTime}</p>
-            <p>Total: ${subOrder.SubTotal}</p>
-            {subOrder.items && subOrder.items.map(item => (
-              <div key={item.MenuItemId}>
-                <img src={item.image_url} alt={item.name} style={{ width: '50px', height: '50px' }} />
-                <p>Name: {item.name}</p>
-                <p>Price: ${item.unit_price}</p>
-                <p>Quantity: {item.quantity}</p>
-                <p>Total: ${item.total_price}</p>
-              </div>
-            ))}
-            {subOrder.OrderStatus === '待確認' && (
-              <>
-                <button onClick={() => handleEditSubOrder(subOrder.SubOrderId)}>编辑</button>
-                <button onClick={() => handleDeleteSubOrder(subOrder.SubOrderId)}>删除</button>
-              </>
-            )}
+    <React.Fragment>
+      <Title />
+      <div className='main-order-group'>
+        <div className='main-order'>
+          <div className="text-space-between">
+            <p>主訂單編號：{orderDetails.mainOrder.MainOrderId}</p>
+            <p>{orderDetails.mainOrder.CreateTime}</p>
           </div>
-        ))}
+          <p>桌號：{orderDetails.mainOrder.TableId}</p>
+          <p>小計：${orderDetails.mainOrder.SubTotal}</p>
+          <p>服務費(10%)：${orderDetails.mainOrder.ServiceFee}</p>
+          <p>總計：${orderDetails.mainOrder.Total}</p>
+          <button className='to-checkout' onClick={goToCheckout}>前往結帳</button>
+        </div>
+        <div className='button-group'>
+          <button className='go-to-order' onClick={goToOrderPage}>繼續點餐</button>
+          <button className='edit-order' onClick={goToOrderPage}>編輯訂單</button>
+          <button className='cancel-order' onClick={goToOrderPage}>取消此訂單</button>
+        </div>
       </div>
-    </div>
+      <div className='function'>
+        <div className='sub-orders'>
+          {orderDetails && orderDetails.subOrders.map(subOrder => (
+            <div key={subOrder.SubOrderId} className='sub-order'>
+              <div className="text-space-between">
+                <p>子訂單編號：</p>
+                <p>2024-04-12 18:54:06</p>
+              </div>
+              <p>{subOrder.SubOrderId}</p>
+              {subOrder.OrderStatu != null ? (<p>訂單狀態：{subOrder.OrderStatus}</p>) : (<></>)}
+              <p>訂單狀態：{subOrder.OrderStatus}</p>
+              <div className="text-space-between">
+                <p>桌號: </p>
+              </div>
+              <div className='text-space-between'>
+                <p>小計：</p>
+                <p>${subOrder.total ? (subOrder.total) : (0)}</p>
+              </div>
+              <hr />
+              {subOrder.items && subOrder.items.length > 0 ? (subOrder.items.map((item, index) => (
+                <React.Fragment key={index}>
+                  <div className='menu-list-item'>
+                    <img src={item.image_url} alt={item.name} style={{ width: '50px', height: '50px' }} />
+                    <div className='menu-item-info'>
+                      <p>{item.name}</p>
+                      <div className='text-space-between'>
+                        <p>${item.unit_price}</p>
+                        <p>{item.quantity} </p>
+                        <p>${item.quantity * item.unit_price}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                </React.Fragment>
+              ))) : (<></>)}
+
+              {subOrder.OrderStatus === '待確認' && (
+                <>
+                  <button onClick={() => handleEditSubOrder(subOrder.SubOrderId)}>編輯</button>
+                  <button onClick={() => handleDeleteSubOrder(subOrder.SubOrderId)}>刪除</button>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </React.Fragment>
   );
 }
 
