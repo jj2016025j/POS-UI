@@ -90,8 +90,7 @@ function ViewOrder() {
           <button className='cancel-order' onClick={goToOrderPage}>取消此訂單</button>
         </div>
       </div>
-      <div className='function'>
-        <div className='sub-orders'>
+      <div className='function sub-orders'>
           {orderDetails && orderDetails.subOrders.map(subOrder => (
             <div key={subOrder.SubOrderId} className='sub-order'>
               <div className="text-space-between">
@@ -134,7 +133,6 @@ function ViewOrder() {
               )}
             </div>
           ))}
-        </div>
       </div>
     </React.Fragment>
   );

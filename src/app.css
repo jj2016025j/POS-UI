@@ -1,5 +1,5 @@
 * {
-    border: 1px solid rgb(156, 130, 76);
+    /* border: 1px solid rgb(156, 130, 76); */
     margin: 0;
     padding: 0;
     font-family: "Segoe UI";
@@ -18,7 +18,7 @@ body,
     display: flex;
     width: 100vw;
     height: 100vh;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 nav {
@@ -378,6 +378,7 @@ hr {
 
 /* 查看訂單的主訂單資訊及功能按鈕區 */
 .main-order-group {
+    margin: 30px;
     display: flex;
     flex-direction: row;
     justify-content: stretch;
@@ -394,6 +395,7 @@ hr {
     justify-content: center;
     align-items: stretch;
     width: 100%;
+    max-width: 600px;
     padding: 10px;
     gap: 10px;
     border-radius: 20px;
