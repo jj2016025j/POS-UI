@@ -1,6 +1,6 @@
 // EditArea.jsx
 import React from 'react';
-import Title from '../components/Title';
+import SubTitle from '../components/SubTitle';
 import { useEditContext } from '../contexts/EditContext';
 
 function EditArea() {
@@ -28,36 +28,35 @@ function EditArea() {
         setEditingItem({ ...editingItem, [e.target.name]: e.target.value });
     };
 
-    if (!editingItem) return null; // 如果没有编辑项，不显示侧边栏
+    // if (!editingItem) return null; // 如果没有编辑项，不显示侧边栏
 
     return (
         <React.Fragment>
-            <Title />
-            <h2>品项编辑</h2>
+            <SubTitle />
             <input
                 type="text"
                 name="MenuItemName"
-                value={editingItem.MenuItemName}
+                value={"1"}
                 onChange={handleChange}
                 placeholder="品项名称"
             />
             <input
                 type="number"
                 name="Price"
-                value={editingItem.Price}
+                value={"2"}
                 onChange={handleChange}
                 placeholder="价格"
             />
             <input
                 type="text"
                 name="image_url"
-                value={editingItem.image_url}
+                value={"3"}
                 onChange={handleChange}
                 placeholder="图片URL"
             />
             <select
                 name="CategoryId"
-                value={editingItem.CategoryId}
+                value={"4"}
                 onChange={handleChange}
             >
                 {/* 假设 categories 是通过 Context 或 Props 传入 */}

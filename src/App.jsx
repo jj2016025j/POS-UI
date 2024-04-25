@@ -51,10 +51,12 @@ function App() {
                                 <Route component={Error} />
                             </Switch>
                         </section>
-                        <Switch>
-                            <Route path={`/order/:mainOrderId`} component={ShoppingCart} />
-                            <Route path={`/editMenuItem`} component={EditArea} />
-                        </Switch>
+                        <aside>
+                            <Switch>
+                                <Route path={`/order/:mainOrderId`} component={ShoppingCart} />
+                                <Route path={`/editMenuItem`} component={EditArea} />
+                            </Switch>
+                        </aside >
                     </div>
                 </BrowserRouter>
             </CartProvider>

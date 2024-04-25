@@ -314,6 +314,17 @@ hr {
     align-self: stretch;
 }
 
+/* 各桌狀態 */
+.tables {
+    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 30px;
+    align-self: stretch;
+}
+
 /* 購物車內容清單 */
 .cart-list-group {
     display: flex;

@@ -40,7 +40,7 @@ function ItemEdit() {
         <React.Fragment>
             <Title />
             <Categories menuData={menuData} scrollToCategory={scrollToCategory} categoryRefs={categoryRefs} />
-            <button onClick={handleAddNewItem}>新增品项</button>
+            <button onClick={handleAddNewItem}>新增品項</button>
             <div className='function'>
                 <div className='menu'>
                     {menuData.categories.map(category => (
@@ -48,7 +48,7 @@ function ItemEdit() {
                             <h1>{category.CategoryName}</h1>
                             <div className='menu-item-list'>
                                 {menuData.menuItems.filter(item => item.CategoryId === category.Id).map(item => (
-                                    <EditMenuItem item={item} setMenuData={setMenuData} />
+                                    <EditMenuItem key={item.Id} item={item} setMenuData={setMenuData} />
                                 ))}
                             </div>
                         </div>
