@@ -75,7 +75,7 @@ function ViewOrder() {
       <div className='main-order-group'>
         <div className='main-order'>
           <div className="text-space-between">
-            <p>主訂單編號：{orderDetails.mainOrder.MainOrderId}</p>
+            <p>訂單編號：{orderDetails.mainOrder.MainOrderId}</p>
             <p>{orderDetails.mainOrder.CreateTime}</p>
           </div>
           <p>桌號：{orderDetails.mainOrder.TableId}</p>

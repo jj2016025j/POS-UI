@@ -13,17 +13,31 @@
 html,
 body,
 .myBody {
+    /* overflow: hidden; */
+}
+
+html {
     background-color: #F6F4F0;
     display: flex;
+    width: 100vw;
+}
+
+body {
+    background-color: #F6F4F0;
     display: flex;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    /* height: 100vh; */
+}
+
+.myBody {
+    background-color: #F6F4F0;
+    display: flex;
+    width: 100vw;
+    /* height: 100vh; */
 }
 
 nav {
     width: 150px;
-    height: 100vh;
     padding: 30px 0px;
     flex-direction: column;
     justify-content: start;
@@ -61,7 +75,7 @@ aside {
     align-self: stretch;
     width: 350px;
     height: 100vh;
-    gap: 20px;
+    gap: 10px;
     flex-shrink: 0;
     z-index: 100;
     background-color: #FFF;
@@ -69,7 +83,7 @@ aside {
     box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
 }
 
-.display-none{
+.display-none {
     display: none
 }
 
@@ -118,6 +132,12 @@ aside {
 .category:hover {
     color: white;
     background-color: rgb(206, 206, 206);
+}
+
+.category-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* 標題群組 */
@@ -492,6 +512,39 @@ hr {
     align-items: stretch;
 }
 
+.edit-item-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 5px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.edit-name-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 100%;
+    gap: 5px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.text-overflow {
+    max-height: 70px;
+    flex-grow: 1;
+    /* white-space: nowrap;  文本不换行 */
+    overflow: hidden;
+    /* 隐藏溢出部分 */
+    text-overflow: ellipsis;
+    /* 使用省略号表示溢出的文本 */
+}
+
 .send-order-button {
     padding: 20px;
     width: 100%;
@@ -625,6 +678,141 @@ hr {
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.25);
 }
 
+.create-new-item-button {
+    position: fixed;
+    right: 400px;
+    top: 300px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 2em;
+    display: flex;
+    /* 使用 flexbox 进行布局 */
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    text-align: center;
+    color: white;
+    background: #B58C24;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
+    /* 确保完全居中 */
+}
+
+.create-new-item-button:hover {
+    background: #a78123;
+    /* 显示指针光标 */
+    outline: none;
+    /* 去除焦点时的轮廓 */
+}
+
+.edit-context {
+    max-width: 100%;
+    margin: 10px auto;
+    /* 水平居中 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    /* 中心对齐子元素 */
+}
+
+[class*="button"] {
+    border: none;
+}
+
+/* [class*="button"] */
+/* 選包含button */
+
+/* 選結尾是button */
+[class$="button"]:hover {
+    filter: brightness(115%);
+    /* 使颜色变亮 */
+}
+
+.edit-item-button-group {
+    display: flex;
+    justify-content: space-between;
+    /* 使按钮之间有均匀的间隔 */
+    align-items: center;
+    /* 垂直居中 */
+    width: 100%;
+    /* 确保填满父容器的宽度 */
+}
+
+.edit-button,
+.delete-button {
+    flex: 1;
+    /* 使每个按钮弹性填充空间 */
+    display: flex;
+    justify-content: center;
+    /* 文字居中 */
+    align-items: center;
+    /* 垂直居中 */
+    padding: 5px 0;
+    /*垂直填充，水平不填充*/
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    /* 添加手形鼠标样式 */
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.25);
+}
+
+.edit-button {
+    background-color: #B58C24;
+    /* 保存按钮的背景颜色 */
+}
+
+.delete-button {
+    background-color: #a70000;
+    /* 取消按钮的背景颜色 */
+}
+
+.edit-button-group {
+    display: flex;
+    justify-content: space-between;
+    /* 使按钮之间有均匀的间隔 */
+    align-items: center;
+    /* 垂直居中 */
+    width: 100%;
+    /* 确保填满父容器的宽度 */
+}
+
+.save-button,
+.cancel-button {
+    flex: 1;
+    /* 使每个按钮弹性填充空间 */
+    display: flex;
+    justify-content: center;
+    /* 文字居中 */
+    align-items: center;
+    /* 垂直居中 */
+    padding: 10px 0;
+    /* 垂直填充，水平不填充 */
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    /* 添加手形鼠标样式 */
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.25);
+}
+
+.save-button {
+    background-color: #B58C24;
+    /* 保存按钮的背景颜色 */
+}
+
+.cancel-button {
+    background-color: #a70000;
+    /* 取消按钮的背景颜色 */
+}
+
+
 .title,
 h1 {
     flex: 1 0 0;
@@ -685,6 +873,17 @@ li p {
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
+}
+
+img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* .table p {
