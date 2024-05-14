@@ -93,3 +93,5 @@ usb.on('detach', function(device){
 
 - 郵件：jj2016025j@gmail.com
 - 電話：0971-003-199
+
+build 失敗
