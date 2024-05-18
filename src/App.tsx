@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import MyRouter from './components/MyRouter';
 import Header from './components/Header';
 import Nav from './components/Nav';
 
 import { CartProvider } from './contexts/CartContext';
 import { EditProvider } from './contexts/EditContext';
+// import RouterLayout from './RouterLayout';
+import MyRouter from './components/MyRouter';
 
 function App() {
     return (
