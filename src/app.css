@@ -886,6 +886,12 @@ img {
     background-repeat: no-repeat;
 }
 
+.center {
+    display: 'flex';
+    justify-content: 'center';
+    align-items: 'center'
+}
+
 /* .table p {
     color: #000;
     text-align: center;

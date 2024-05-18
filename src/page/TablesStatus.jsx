@@ -2,6 +2,7 @@
  * 取得當前桌號狀態並丟給各桌組件V
  */
 import React, { useState, useEffect } from 'react';
+import {Button} from 'antd'
 import axios from 'axios';
 import Table from '../components/Table';
 import Title from '../components/Title';
@@ -30,6 +31,7 @@ function TablesStatus() {
     return (
         <React.Fragment>
             <Title />
+            <Button>測試</Button>
             <div className='tables'>
                 {tables.map(table => (
                     <Table key={table.Id} table={table} updateTable={updateTable} updateTables={fetchTables} />
