@@ -1,6 +1,6 @@
 // EditArea.jsx
 import React, { useEffect, useState } from 'react';
-import SubTitle from './SubTitle';
+import SubTitle from '../components/SubTitle';
 import { useEditContext } from '../contexts/EditContext';
 
 function EditArea() {

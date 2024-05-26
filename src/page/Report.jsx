@@ -3,7 +3,6 @@ import AllData from '../components/AllData';
 import LastMonthData from '../components/LastMonthData';
 import Title from '../components/Title';
 
-
 function Report() {
     return (
         <React.Fragment>
