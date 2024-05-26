@@ -2,6 +2,7 @@ import React from 'react';
 import AllData from '../components/AllData';
 import Title from '../components/Title';
 
+
 function Report() {
 
     return (

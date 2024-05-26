@@ -17,7 +17,7 @@ import Settings from '../page/Settings';
 import Error from '../page/Error';
 
 import ShoppingCart from '../components/ShoppingCart';
-import EditArea from '../components/EditArea';
+import EditArea from './EditArea';
 
 function MyRouter() {
     const location = useLocation();
