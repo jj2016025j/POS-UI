@@ -3,11 +3,12 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
+// 圓餅圖
 function LastMonthData() {
   const [sellData, setSellData] = useState([]);
 
   useEffect(() => {
-    fetch('/data/lastMonth')
+    fetch('/data/all')
       .then(response => response.json())
       .then(data => setSellData(data))
       .catch(error => console.error('Error fetching data:', error));
