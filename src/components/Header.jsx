@@ -1,10 +1,7 @@
 
 import React from 'react';
 
-interface HeaderProps {
-  title: string;
-}
-const Header: React.FC<HeaderProps> = ({ title }) => {
+function Header({ title }) {
   return (
     <React.Fragment>
       <meta charSet="UTF-8" />
