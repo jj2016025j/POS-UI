@@ -1,5 +1,5 @@
 import React from 'react';
-import AllData from '../components/AllData';
+import SalesReportChart from '../components/SalesReportChart';
 import Title from '../components/Title';
 
 function Report() {
@@ -7,7 +7,7 @@ function Report() {
     return (
         <React.Fragment>
             <Title />
-            <AllData />
+            <SalesReportChart />
             <br />
         </React.Fragment >
     );

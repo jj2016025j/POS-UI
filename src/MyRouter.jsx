@@ -1,23 +1,23 @@
 import React from 'react';
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
-import TablesStatus from '../page/TablesStatus';
-import Menu from '../page/Menu';
-import ViewOrder from '../page/ViewOrder';
-import ConfirmSubOrder from '../page/ConfirmSubOrder';
-import PhoneOrder from '../page/PhoneOrder';
-import PhoneConfirmorder from '../page/PhoneConfirmorder';
-import PhoneCompleteOrder from '../page/PhoneCompleteOrder';
-import Edit from '../page/Edit';
-import Report from '../page/Report';
-import Checkout from '../page/Checkout';
-import OrderHistory from '../page/OrderHistory';
-import RoleManagement from '../page/RoleManagement';
-import Settings from '../page/Settings';
+import TablesStatus from './page/TablesStatus';
+import Menu from './page/Menu';
+import ViewOrder from './page/ViewOrder';
+import ConfirmSubOrder from './page/ConfirmSubOrder';
+import PhoneOrder from './page/PhoneOrder';
+import PhoneConfirmorder from './page/PhoneConfirmorder';
+import PhoneCompleteOrder from './page/PhoneCompleteOrder';
+import Edit from './page/Edit';
+import ReportPage from './page/ReportPage';
+import Checkout from './page/Checkout';
+import OrderHistory from './page/OrderHistory';
+import RoleManagement from './page/RoleManagement';
+import Settings from './page/Settings';
 
-import Error from '../page/Error';
+import Error from './page/Error';
 
-import ShoppingCart from '../components/ShoppingCart';
-import EditArea from '../components/EditArea';
+import ShoppingCart from './components/ShoppingCart';
+import EditArea from './components/EditArea';
 
 function MyRouter() {
     const location = useLocation();
@@ -38,7 +38,7 @@ function MyRouter() {
                     <Route path={`/checkout/:mainOrderId`} component={Checkout} />
                     <Route path={`/orderhistory`} component={OrderHistory} />
                     <Route path={`/editMenuItem`} component={Edit} />
-                    <Route path={`/report`} component={Report} />
+                    <Route path={`/report`} component={ReportPage} />
                     <Route path="/role" component={RoleManagement} />
                     <Route path="/setting" component={Settings} />
                     <Route component={Error} />
