@@ -10,6 +10,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Title from '../components/Title';
+import TableAlpha from '../components/TableAlpha';
 
 function OrderHistory() {
   const [orders, setOrders] = useState([]);
@@ -26,14 +27,75 @@ function OrderHistory() {
   }, []);
 
   const handleOrderClick = (mainOrderId) => {
+    console.log(mainOrderId)
     // 使用 history.push 来跳转到查看订单页面
+    if(mainOrderId)
     history.push(`/vieworder/${mainOrderId}`);
   };
+
+  const columns = [
+    {
+      title: '名稱',
+      dataIndex: 'name',
+      key: 'name',
+      align: 'center',
+      sorter: true,
+      width: 100,
+    },
+    {
+      title: '網址',
+      dataIndex: 'url',
+      key: 'url',
+      align: 'center',
+      sorter: true,
+    },
+    {
+      title: '狀態',
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      filters: [
+        { text: '在線', value: 'online' },
+        { text: '離線', value: 'offline' },
+      ],
+      width: 80,
+    },
+    {
+      title: '自動錄影',
+      dataIndex: 'auto_record',
+      key: 'auto_record',
+      align: 'center',
+      width: 100,
+      filters: [
+        { text: '自動錄影', value: 'true' },
+        { text: '不自動錄影', value: 'false' },
+      ],
+    },
+    {
+      title: '其他選項',
+      key: 'options',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: '操作',
+      key: 'operate',
+      align: 'center',
+      width: 100,
+    }]
 
   return (
     <React.Fragment>
       <Title />
-      <div className='function'>
+      <TableAlpha
+        rowKey='id'
+        columns={columns}
+        dataSource={orders}
+        onRow={(record) => ({
+            onClick: () => handleOrderClick(record), // 點擊行時觸發的事件
+        })}
+      />
+      {/* <div className='function'>
         <div className='wrap'>
           {orders.map(order => (
             <li className='history-order' key={order.MainOrderId} onClick={() => handleOrderClick(order.MainOrderId)}>
@@ -48,7 +110,7 @@ function OrderHistory() {
             </li>
           ))}
         </div>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 }
