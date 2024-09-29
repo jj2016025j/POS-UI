@@ -30,7 +30,7 @@ function TablesStatus() {
     return (
         <React.Fragment>
             <Title />
-            <div className='wrap'>
+            <div className='tables'>
                 {tables.map(table => (
                     <Table key={table.Id} table={table} updateTable={updateTable} updateTables={fetchTables} />
                 ))}

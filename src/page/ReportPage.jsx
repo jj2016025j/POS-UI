@@ -1,15 +1,13 @@
 import React from 'react';
-import AllData from '../components/AllData';
-import LastMonthData from '../components/LastMonthData';
+import SalesReportChart from '../components/SalesReportChart';
 import Title from '../components/Title';
 
 function Report() {
+
     return (
         <React.Fragment>
             <Title />
-            <AllData />
-            <hr />
-            <LastMonthData />
+            <SalesReportChart />
             <br />
         </React.Fragment >
     );

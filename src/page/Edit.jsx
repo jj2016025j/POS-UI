@@ -1,33 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import EditMenuItem from '../components/EditMenuItem';
 import Categories from '../components/Categories';
 import Title from '../components/Title';
+import { useEditContext } from '../contexts/EditContext'
 
 function ItemEdit() {
-    const [menuData, setMenuData] = useState({ categories: [], menuItems: [] });
-    const [editingItem, setEditingItem] = useState(null);
-    const categoryRefs = useRef({});
-
-    useEffect(() => {
-        axios.get('/menu')
-            .then(response => {
-                setMenuData(response.data);
-                categoryRefs.current = response.data.categories.reduce((acc, category) => {
-                    acc[category.Id] = React.createRef();
-                    return acc;
-                }, {});
-            })
-            .catch(error => console.error('Fetching menu data error: ', error));
-    }, []);
-
-    console.log(editingItem);
-    const scrollToCategory = (categoryId) => {
-        const ref = categoryRefs.current[categoryId];
-        if (ref && ref.current) {
-            ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    };
+    const {
+        menuData,
+        setEditingItem,
+        scrollToCategory,
+        categoryRefs 
+    } = useEditContext();
 
     const handleAddNewItem = () => {
         // 刷新成空白編輯區域
@@ -39,8 +22,8 @@ function ItemEdit() {
     return (
         <React.Fragment>
             <Title />
-            <Categories menuData={menuData} scrollToCategory={scrollToCategory} categoryRefs={categoryRefs} />
-            <button onClick={handleAddNewItem}>新增品项</button>
+            <Categories menuData={menuData} scrollToCategory={scrollToCategory} />
+            <button className='create-new-item-button' onClick={handleAddNewItem}>+</button>
             <div className='function'>
                 <div className='menu'>
                     {menuData.categories.map(category => (
@@ -48,7 +31,7 @@ function ItemEdit() {
                             <h1>{category.CategoryName}</h1>
                             <div className='menu-item-list'>
                                 {menuData.menuItems.filter(item => item.CategoryId === category.Id).map(item => (
-                                    <EditMenuItem item={item} setMenuData={setMenuData} />
+                                    <EditMenuItem key={item.Id} item={item} />
                                 ))}
                             </div>
                         </div>

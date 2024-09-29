@@ -39,7 +39,7 @@ function ShoppingCart() {
   };
 
   return (
-    <aside>
+    <React.Fragment>
       <SubTitle />
       <div className='cart-list-group'>
         <div>
@@ -61,7 +61,7 @@ function ShoppingCart() {
         </div>
         <button className='confirm-order-button' onClick={handleConfirmOrder}>確認訂單</button>
       </div>
-    </aside >
+    </React.Fragment>
   );
 }
 

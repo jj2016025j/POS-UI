@@ -8,7 +8,7 @@ const SubTitle = () => {
     // 使用正則表達式來匹配動態路徑
     if (/^\/order\/.+$/.test(location.pathname)) {
         title = '購物車 MENU';
-    } else if (/^\/vieworder\/.+$/.test(location.pathname)) {
+    } else if (/^\/editMenuItem\/.+$/.test(location.pathname)) {
         title = '品項編輯 EDIT';
     } else {
         // 基於路徑的靜態標題匹配
