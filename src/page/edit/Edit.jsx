@@ -1,8 +1,8 @@
 import React from 'react';
-import EditMenuItem from '../components/EditMenuItem';
-import Categories from '../components/Categories';
-import Title from '../components/Title';
-import { useEditContext } from '../contexts/EditContext'
+import EditMenuItem from './EditMenuItem';
+import Categories from '../../components/Categories';
+import Title from '../../components/Title';
+import { useEditContext } from '../../contexts/EditContext'
 
 function ItemEdit() {
     const {
@@ -27,10 +27,10 @@ function ItemEdit() {
             <div className='function'>
                 <div className='menu'>
                     {menuData.categories.map(category => (
-                        <div key={category.Id} ref={categoryRefs.current[category.Id]} className='category-section'>
-                            <h1>{category.CategoryName}</h1>
+                        <div key={category.Id} ref={categoryRefs.current[category.id]} className='category-section'>
+                            <h1>{category.name}</h1>
                             <div className='menu-item-list'>
-                                {menuData.menuItems.filter(item => item.CategoryId === category.Id).map(item => (
+                                {menuData.menuItems.filter(item => item.categoryId === category.id).map(item => (
                                     <EditMenuItem key={item.Id} item={item} />
                                 ))}
                             </div>

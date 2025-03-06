@@ -17,7 +17,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import Title from '../components/Title';
+import Title from '../../components/Title';
 
 function ViewOrder() {
   const { mainOrderId } = useParams();
@@ -25,13 +25,17 @@ function ViewOrder() {
   const [orderDetails, setOrderDetails] = useState({ mainOrder: null, subOrders: [] });
 
   useEffect(() => {
-    axios.get(`/order/getMainAndSubOrder/${mainOrderId}`)
-      .then(response => {
-        // 确保响应中包含mainOrder和subOrders，如果没有则设置为null或空数组
-        setOrderDetails({
-          mainOrder: response.data.mainOrder || null,
-          subOrders: response.data.subOrders || []
-        });
+    axios.post(`/mainOrder/getMainOrderInfo`, { mainOrderId })
+      .then(main_response => {
+        axios.post(`/subOrder/getSubOrderInfo`, { mainOrderId })
+          .then(sub_response => {
+
+            // 确保响应中包含mainOrder和subOrders，如果没有则设置为null或空数组
+            setOrderDetails({
+              mainOrder: main_response.data || null,
+              subOrders: sub_response.data || []
+            });
+          })
       })
       .catch(error => {
         console.error("Error fetching order details:", error);
@@ -75,13 +79,13 @@ function ViewOrder() {
       <div className='main-order-group'>
         <div className='main-order'>
           <div className="text-space-between">
-            <p>訂單編號：{orderDetails.mainOrder.MainOrderId}</p>
-            <p>{orderDetails.mainOrder.CreateTime}</p>
+            <p>訂單編號：{orderDetails.mainOrder.mainOrderId}</p>
+            <p>{orderDetails.mainOrder.createTime}</p>
           </div>
-          <p>桌號：{orderDetails.mainOrder.TableId}</p>
-          <p>小計：${orderDetails.mainOrder.SubTotal}</p>
-          <p>服務費(10%)：${orderDetails.mainOrder.ServiceFee}</p>
-          <p>總計：${orderDetails.mainOrder.Total}</p>
+          <p>桌號：{orderDetails.mainOrder.tableNumber}</p>
+          <p>小計：${orderDetails.mainOrder.subTotal}</p>
+          <p>服務費(10%)：${orderDetails.mainOrder.serviceFee}</p>
+          <p>總計：${orderDetails.mainOrder.total}</p>
           <button className='to-checkout' onClick={goToCheckout}>前往結帳</button>
         </div>
         <div className='button-group'>
@@ -91,48 +95,48 @@ function ViewOrder() {
         </div>
       </div>
       <div className='function sub-orders'>
-          {orderDetails && orderDetails.subOrders.map(subOrder => (
-            <div key={subOrder.SubOrderId} className='sub-order'>
-              <div className="text-space-between">
-                <p>子訂單編號：</p>
-                <p>2024-04-12 18:54:06</p>
-              </div>
-              <p>{subOrder.SubOrderId}</p>
-              {subOrder.OrderStatu != null ? (<p>訂單狀態：{subOrder.OrderStatus}</p>) : (<></>)}
-              <p>訂單狀態：{subOrder.OrderStatus}</p>
-              <div className="text-space-between">
-                <p>桌號: </p>
-              </div>
-              <div className='text-space-between'>
-                <p>小計：</p>
-                <p>${subOrder.total ? (subOrder.total) : (0)}</p>
-              </div>
-              <hr />
-              {subOrder.items && subOrder.items.length > 0 ? (subOrder.items.map((item, index) => (
-                <React.Fragment key={index}>
-                  <div className='menu-list-item'>
-                    <img src={item.image_url} alt={item.name} style={{ width: '50px', height: '50px' }} />
-                    <div className='menu-item-info'>
-                      <p>{item.name}</p>
-                      <div className='text-space-between'>
-                        <p>${item.unit_price}</p>
-                        <p>{item.quantity} </p>
-                        <p>${item.quantity * item.unit_price}</p>
-                      </div>
+        {orderDetails && orderDetails.subOrders.map(subOrder => (
+          <div key={subOrder.SubOrderId} className='sub-order'>
+            <div className="text-space-between">
+              <p>子訂單編號：</p>
+              <p>2024-04-12 18:54:06</p>
+            </div>
+            <p>{subOrder.SubOrderId}</p>
+            {subOrder.OrderStatu != null ? (<p>訂單狀態：{subOrder.OrderStatus}</p>) : (<></>)}
+            <p>訂單狀態：{subOrder.OrderStatus}</p>
+            <div className="text-space-between">
+              <p>桌號: </p>
+            </div>
+            <div className='text-space-between'>
+              <p>小計：</p>
+              <p>${subOrder.total ? (subOrder.total) : (0)}</p>
+            </div>
+            <hr />
+            {subOrder.items && subOrder.items.length > 0 ? (subOrder.items.map((item, index) => (
+              <React.Fragment key={index}>
+                <div className='menu-list-item'>
+                  <img src={item.image_url} alt={item.name} style={{ width: '50px', height: '50px' }} />
+                  <div className='menu-item-info'>
+                    <p>{item.name}</p>
+                    <div className='text-space-between'>
+                      <p>${item.unit_price}</p>
+                      <p>{item.quantity} </p>
+                      <p>${item.quantity * item.unit_price}</p>
                     </div>
                   </div>
-                  <hr />
-                </React.Fragment>
-              ))) : (<></>)}
+                </div>
+                <hr />
+              </React.Fragment>
+            ))) : (<></>)}
 
-              {subOrder.OrderStatus === '待確認' && (
-                <>
-                  <button onClick={() => handleEditSubOrder(subOrder.SubOrderId)}>編輯</button>
-                  <button onClick={() => handleDeleteSubOrder(subOrder.SubOrderId)}>刪除</button>
-                </>
-              )}
-            </div>
-          ))}
+            {subOrder.OrderStatus === '待確認' && (
+              <>
+                <button onClick={() => handleEditSubOrder(subOrder.SubOrderId)}>編輯</button>
+                <button onClick={() => handleDeleteSubOrder(subOrder.SubOrderId)}>刪除</button>
+              </>
+            )}
+          </div>
+        ))}
       </div>
     </React.Fragment>
   );

@@ -8,7 +8,7 @@ function LastMonthData() {
   const [sellData, setSellData] = useState([]);
 
   useEffect(() => {
-    fetch('/data/all')
+    fetch('/data/getDataReport')
       .then(response => response.json())
       .then(data => setSellData(data))
       .catch(error => console.error('Error fetching data:', error));

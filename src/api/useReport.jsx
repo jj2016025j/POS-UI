@@ -6,7 +6,7 @@ const useReport = () => {
     const useReport = {
         getReportFunc: () => {
             console.log(data)
-            axios.post('/data', data)
+            axios.post('/data/getDataReport', data)
                 .then(response => {
                     setReportData(response.data)
                     return response.data; // 返回請求結果
@@ -16,13 +16,13 @@ const useReport = () => {
                 });
         },
         getReport: reportData,
-        getAll:()=>{
-            fetch('/data/all')
-            .then(response => {
-              return response.json()
-            })
-            .catch(error => console.error('Error fetching data:', error));      
-        }
+        // getAll:()=>{
+        //     fetch('/data/getDataReport')
+        //     .then(response => {
+        //       return response.json()
+        //     })
+        //     .catch(error => console.error('Error fetching data:', error));      
+        // }
     }
     return { ...useReport }
 };
@@ -32,6 +32,9 @@ export { useReport };
 const data = {
     startTime: '2023-01-01T00:00:00Z',
     endTime: '2023-02-02T00:00:00Z',
-    statisticalContent: 'all' //'classification' 'items'
+    "metric": ["salesQuantity", "sales"],
+    "timeUnit": "month",
+    "category": "item",
+    "item": ["itemA", "itemB"]
 }
 

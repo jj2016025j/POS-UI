@@ -1,23 +1,23 @@
 import React from 'react';
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
-import TablesStatus from './page/TablesStatus';
-import Menu from './page/Menu';
-import ViewOrder from './page/ViewOrder';
+import TablesStatus from './page/home/TablesStatus';
+import Menu from './page/menu/Menu';
+import ViewOrder from './page/viewOrder/ViewOrder';
 import ConfirmSubOrder from './page/ConfirmSubOrder';
 import PhoneOrder from './page/PhoneOrder';
 import PhoneConfirmorder from './page/PhoneConfirmorder';
 import PhoneCompleteOrder from './page/PhoneCompleteOrder';
-import Edit from './page/Edit';
+import Edit from './page/edit/Edit';
 import ReportPage from './page/ReportPage';
 import Checkout from './page/Checkout';
-import OrderHistory from './page/OrderHistory';
+import OrderHistory from './page/history/OrderHistory';
 import RoleManagement from './page/RoleManagement';
 import Settings from './page/Settings';
 
 import Error from './page/Error';
 
 import ShoppingCart from './components/ShoppingCart';
-import EditArea from './components/EditArea';
+import EditArea from './page/edit/EditArea';
 
 function MyRouter() {
     const location = useLocation();

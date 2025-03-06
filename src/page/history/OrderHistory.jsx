@@ -9,15 +9,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import Title from '../components/Title';
-import TableAlpha from '../components/TableAlpha';
+import Title from '../../components/Title';
+import TableAlpha from './TableAlpha';
 
 function OrderHistory() {
   const [orders, setOrders] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    axios.get('/order/getrecentorders')
+    axios.get('/mainOrder/getRecentOrders')
       .then(response => {
         setOrders(response.data);
       })

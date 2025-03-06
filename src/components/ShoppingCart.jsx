@@ -25,18 +25,41 @@ function ShoppingCart() {
   const handleConfirmOrder = () => {
     if (SubOrderInfo.items.length === 0) {
       alert("購物車是空的，請添加品項後再確認訂單。");
-    } else {
-      axios.post(`/order/addSubOrder/${mainOrderId}`)
-        .then((response) => {
-          const subOrderId = response.data.SubOrderId;
-          console.log(`新建訂單成功，訂單ID: ${subOrderId}`);
-          history.push(`/confirmsuborder/${mainOrderId}?subOrderId=${subOrderId}`);
-        })
-        .catch(error => {
-          console.error('Error fetching TableId:', error);
-        });
+      return;
     }
+
+    let subOrderId; // 先宣告變數，讓後面的 .then() 也能存取
+
+    // 1️⃣ 先建立子訂單
+    axios.post(`/subOrder/createSubOrder`, { mainOrderId })
+      .then((response) => {
+        subOrderId = response.data.subOrderId;
+        console.log(`新建訂單成功，訂單ID: ${subOrderId}`);
+
+        // 構造訂單內容
+        const orderData = {
+          subOrderId,
+          orderStatus: "製作中",
+          menuItems: SubOrderInfo.items.map(item => ({
+            menuItemId: item.id,
+            quantity: item.quantity
+          }))
+        };
+
+        // 2️⃣ 更新子訂單內容
+        return axios.post(`/subOrder/editSubOrder`, orderData);
+      })
+      .then(() => {
+        console.log("訂單內容更新成功");
+
+        // 3️⃣ 跳轉到確認訂單頁面
+        history.push(`/confirmsuborder/${mainOrderId}?subOrderId=${subOrderId}`);
+      })
+      .catch(error => {
+        console.error('Error 訂單處理失敗:', error);
+      });
   };
+
 
   return (
     <React.Fragment>
@@ -46,7 +69,7 @@ function ShoppingCart() {
           {SubOrderInfo.items && SubOrderInfo.items.length > 0 ? (
             SubOrderInfo.items.map(item => (
               <div key={item.Id}>
-                <p>{item.MenuItemName}: {item.quantity} x ${item.Price} = ${item.quantity * item.Price}</p>
+                <p>{item.menuItemName}: {item.quantity} x ${item.price} = ${item.quantity * item.price}</p>
               </div>
             ))
           ) : (

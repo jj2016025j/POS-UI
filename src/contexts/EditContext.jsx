@@ -19,13 +19,34 @@ export const EditProvider = ({ children }) => {
 
     const getMenuData = async () => {
         try {
-            const response = await axios.get('/menu');
-            setMenuData(response.data);
+            const response = await axios.get('/menu/getAllMenuItems');
+
+            // 確保 categories 存在，因為 API 只回傳品項
+            const categoriesMap = {};
+
+            response.data.forEach(item => {
+                const categoryId = item.categoryId;
+                if (!categoriesMap[categoryId]) {
+                    categoriesMap[categoryId] = {
+                        id: categoryId,
+                        name: `分類 ${categoryId}`, // 如果 API 沒提供分類名稱，你可以用這種方式生成
+                        items: []
+                    };
+                }
+                categoriesMap[categoryId].items.push(item);
+            });
+
+            setMenuData({
+                categories: Object.values(categoriesMap), // 轉換成陣列
+                menuItems: response.data // 保留原始品項
+            });
+
             // 更新 categoryRefs
-            categoryRefs.current = response.data.categories.reduce((acc, category) => {
-                acc[category.Id] = React.createRef();
+            categoryRefs.current = Object.values(categoriesMap).reduce((acc, category) => {
+                acc[category.id] = React.createRef();
                 return acc;
             }, {});
+
         } catch (error) {
             console.error('Fetching menu data error:', error);
         }
@@ -39,24 +60,24 @@ export const EditProvider = ({ children }) => {
     };
 
     const addOrUpdateItem = async (item) => {
-        console.log(item);
-        if (!item.MenuItemName) {
+        // console.log3(item);
+        if (!item.menuItemName) {
             alert('請填寫品項名稱');
             return;
         }
 
-        if (!item.CategoryId) {
+        if (!item.categoryId) {
             alert('請選擇品項類別');
             return;
         }
 
-        if (!item.Price) {
+        if (!item.price) {
             alert('請填寫價格');
             return;
         }
 
-        const method = item.id ? 'put' : 'post';
-        const url = item.id ? `/menu/${item.id}` : '/menu';
+        const method = 'post';
+        const url = item.id ? `/menu/editMenuItem` : '/menu/addNewMenuItem';
         try {
             await axios[method](url, item);
             getMenuData();
@@ -66,9 +87,9 @@ export const EditProvider = ({ children }) => {
         }
     };
 
-    const deleteItem = async (itemId) => {
+    const deleteItem = async (item) => {
         try {
-            await axios.delete(`/menu/items/${itemId}`);
+            await axios.post(`/menu/deleteMenuItem`,{menuItemId:item.id});
             getMenuData();
             clearEdit();
         } catch (error) {

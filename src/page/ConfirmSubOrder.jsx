@@ -5,7 +5,7 @@
  */
 import React, { useEffect } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import { useCart } from '../contexts/CartContext';
 import Title from '../components/Title';
 
@@ -18,6 +18,7 @@ function ConfirmSubOrder() {
   const { getSubOrderInfo } = useCart();
 
   const subOrder = getSubOrderInfo(mainOrderId);
+  console.log(subOrder)
   subOrder.subOrderId = subOrderId
   useEffect(() => {
 
@@ -25,14 +26,16 @@ function ConfirmSubOrder() {
 
   const handleSubmitOrder = () => {
     console.log("发送订单请求", subOrderId, subOrder);
-    axios.post(`/order/subOrder/${subOrderId}`, { subOrder: subOrder })
-      .then(() => {
-        alert("送出訂單成功")
-        history.push('/pos'); // 成功后导航回首页
-      })
-      .catch(error => {
-        console.error('Error fetching TableId:', error);
-      });
+    // axios.post(`/subOrder/editSubOrder`, subOrder)
+    //   .then(() => {
+    //     alert("送出訂單成功")
+    //     history.push('/pos'); // 成功后导航回首页
+    //   })
+    //   .catch(error => {
+    //     console.error('Error fetching TableId:', error);
+    //   });
+    alert("送出訂單成功")
+    history.push('/pos'); // 成功后导航回首页
     // const isConfirmed = window.confirm("确认提交订单吗?");
     //     if (isConfirmed) {
     //     }
@@ -49,11 +52,11 @@ function ConfirmSubOrder() {
                 <p>子訂單編號: {subOrder.subOrderId}</p>
                 <p>2024-04-12 18:54:06</p>
               </div>
-              {subOrder.OrderStatu != null ? (<p>訂單狀態：{subOrder.OrderStatus}</p>) : (<></>)}
-              <p>訂單狀態：{subOrder.OrderStatus}</p>
+              {/* {subOrder.OrderStatu != null ? (<p>訂單狀態：{subOrder.OrderStatus}</p>) : (<></>)}
+              <p>訂單狀態：{subOrder.orderStatus}</p>
               <div className="text-space-between">
                 <p>桌號: </p>
-              </div>
+              </div> */}
               <div className='text-space-between'>
                 <p>總計</p>
                 <p>${subOrder.total ? (subOrder.total) : (0)}</p>
@@ -62,13 +65,13 @@ function ConfirmSubOrder() {
               {subOrder.items && subOrder.items.length > 0 ? (subOrder.items.map((item, index) => (
                 <React.Fragment key={index}>
                   <div className='menu-list-item'>
-                    <img src={item.image_url} alt={item.MenuItemName} style={{ width: '50px' }} />
+                    <img src={item.image_url} alt={item.menuItemName} style={{ width: '50px' }} />
                     <div className='menu-item-info'>
-                      <p>{item.MenuItemName}</p>
+                      <p>{item.menuItemName}</p>
                       <div className='text-space-between'>
                         <p>{item.quantity} </p>
-                        <p>${item.Price}</p>
-                        <p>${item.quantity * item.Price}</p>
+                        <p>${item.price}</p>
+                        <p>${item.quantity * item.price}</p>
                       </div>
                     </div>
                   </div>

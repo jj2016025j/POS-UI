@@ -34,43 +34,19 @@ TEST_MYSQL_DATABASE = 'fang_pos_system'
 npm i
 ```
 
-# 執行初始化資料表
-```bash
-node initDB
-```
-
 # 運行項目
 ```bash
 npm start
+//或是
+yarn start
 ```
 
 ## **使用說明**
 
-- **網站訪問**：在終端機會顯示以下內容，點擊他或是在瀏覽器中輸入**`http://localhost:8080`**訪問芳鍋網站。
+- **網站訪問**：
+點擊以下連結或等待react自動開啟網頁
 ```bash
-官方網站: http://localhost:8080
-pos系統: http://localhost:8080/pos
-局域網 IPv4 地址:  http://192.168.1.243:8080
-```
-
-# 錯誤修正
-因為打印機操作庫有版本問題
-會發生以下錯誤
-
-```bash
-TypeError: usb.on is not a function
-at new USB (path/to/FANGS-FOOD-POS-System\node_modules\escpos-usb\index.js:52:7)
-```
-
-需要把腳本裡面的以下程式碼刪除
-```bash
-usb.on('detach', function(device){
-  if(device == self.device) {
-    self.emit('detach'    , device);
-    self.emit('disconnect', device);
-    self.device = null;
-  }
-});
+pos系統: http://localhost:3000
 ```
 
 ## **貢獻指南**
@@ -92,6 +68,3 @@ usb.on('detach', function(device){
 如有任何問題或建議，請通過以下方式聯絡我們：
 
 - 郵件：jj2016025j@gmail.com
-- 電話：0971-003-199
-
-build 失敗

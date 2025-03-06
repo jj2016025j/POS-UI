@@ -1,7 +1,7 @@
 // EditMenuItem.jsx
 import React from 'react';
-import MenuItemInfo from './MenuItemInfo';
-import { useEditContext } from '../contexts/EditContext'
+import MenuItemInfo from '../../components/MenuItemInfo';
+import { useEditContext } from '../../contexts/EditContext'
 
 function EditMenuItem({ item }) {
   const {

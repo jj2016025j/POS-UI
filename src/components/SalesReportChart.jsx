@@ -44,11 +44,11 @@ function AllData() {
   const [content, setContent] = useState('all');// 'all' 'classification' 'items'
   const [weekStart, weekEnd] = getWeekStartAndEnd();
 
-  const { getReport, getReportFunc, getAll } = useReport()
+  const { getReport, getReportFunc } = useReport()
 
   // 日期 多選 單選
   useEffect(() => {
-    getAll()
+    // getAll()
     getReportFunc()
     setContent('all')
   }, []);

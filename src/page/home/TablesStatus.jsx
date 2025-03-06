@@ -3,8 +3,8 @@
  */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Table from '../components/Table';
-import Title from '../components/Title';
+import Table from './Table';
+import Title from '../../components/Title';
 
 function TablesStatus() {
     const [tables, setTables] = useState([]);
@@ -13,7 +13,7 @@ function TablesStatus() {
     }, []);
 
     const fetchTables = () => {
-        axios.get('/order/getAllTableStatus')
+        axios.get('/table/getAllTableInfo')
             .then(response => setTables(response.data))
             .catch(error => {
                 console.error('Error fetching tables status:', error);
@@ -32,7 +32,7 @@ function TablesStatus() {
             <Title />
             <div className='tables'>
                 {tables.map(table => (
-                    <Table key={table.Id} table={table} updateTable={updateTable} updateTables={fetchTables} />
+                    <Table key={table.tableNumber} table={table} updateTable={updateTable} updateTables={fetchTables} />
                 ))}
             </div>
         </React.Fragment>

@@ -1,7 +1,7 @@
 // EditArea.jsx
 import React, { useEffect, useState } from 'react';
-import SubTitle from '../components/SubTitle';
-import { useEditContext } from '../contexts/EditContext';
+import SubTitle from '../../components/SubTitle';
+import { useEditContext } from '../../contexts/EditContext';
 
 function EditArea() {
     const {
@@ -15,6 +15,8 @@ function EditArea() {
     // const handleChange = (e) => {
     //     setEditingItem({ ...editingItem, [e.target.name]: e.target.value });
     // };
+    console.log(editingItem);
+    console.log(menuData);
 
     useEffect(() => {
         if (editingItem?.image_url) {
@@ -46,26 +48,26 @@ function EditArea() {
                 <input
                     type="text"
                     name="MenuItemName"
-                    value={editingItem?.MenuItemName || ''}
+                    value={editingItem?.menuItemName || ''}
                     onChange={handleChange}
                     placeholder="請輸入品項名稱"
                 />
                 <select
                     name="CategoryId"
-                    value={editingItem?.CategoryId || ''}
+                    value={editingItem?.categoryId || ''}
                     onChange={handleChange}
                 >
                     <option value="">請選擇分類</option>
                     {menuData.categories.map(category => (
                         <option key={category.Id} value={category.Id}>
-                            {category.CategoryName}
+                            {category.name}
                         </option>
                     ))}
                 </select>
                 <input
                     type="number"
                     name="Price"
-                    value={editingItem?.Price || ''}
+                    value={editingItem?.price || ''}
                     onChange={handleChange}
                     placeholder="請輸入價格"
                 />

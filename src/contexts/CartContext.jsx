@@ -27,7 +27,7 @@ export const CartProvider = ({ children }) => {
     }, [SubOrderInfo]);
 
     const updateCartSummary = (itemsForTable) => {
-        const total = itemsForTable.reduce((total, item) => total + item.quantity * item.Price, 0);
+        const total = itemsForTable.reduce((total, item) => total + item.quantity * item.price, 0);
 
         return {
             total
@@ -37,37 +37,36 @@ export const CartProvider = ({ children }) => {
     const addToCart = (mainOrderId, newItem, newQuantity) => {
         setCartItems(prevItems => {
             let itemsForTable = prevItems[mainOrderId]?.items || [];
-            console.log("itemsForTable", itemsForTable.map(item => `${item.Id} (${typeof item.Id})`));
-            // console.log("newItem", `${newItem.Id} (${typeof newItem.Id})`);
-            const existItemIndex = itemsForTable.findIndex(item => item.Id === newItem.Id);
-            console.log("找到位置", existItemIndex)
+    
+            if (!newItem.id) {
+                console.error("商品 ID 無效:", newItem);
+                return prevItems;
+            }
+    
+            // 確保 `findIndex` 比對時 `Id` 正確
+            const existItemIndex = itemsForTable.findIndex(item => item.id === newItem.id);
+    
             if (existItemIndex > -1) {
+                // 如果品項已經存在，更新數量或刪除
                 if (newQuantity > 0) {
-                    console.log("更新數量", newQuantity)
                     itemsForTable = itemsForTable.map((item, index) =>
                         index === existItemIndex ? { ...item, quantity: newQuantity } : item
                     );
                 } else {
-                    console.log("移除該商品", newQuantity)
-
-                    itemsForTable = itemsForTable.filter((item, index) => index !== existItemIndex);
+                    itemsForTable = itemsForTable.filter((_, index) => index !== existItemIndex);
                 }
             } else if (newQuantity > 0) {
-                console.log("添加新商品", newQuantity)
+                // 如果品項不存在，添加新商品
                 itemsForTable = [...itemsForTable, { ...newItem, quantity: newQuantity }];
-            } else {
-                console.log("不知道做了甚麼")
             }
-            console.log("itemsForTable", itemsForTable.map(item => `${item.Id} (${typeof item.Id})`));
-
+    
             const updatedTableInfo = updateCartSummary(itemsForTable);
-            console.log("updatedTableInfo", updatedTableInfo);
-
+    
             return {
                 ...prevItems,
                 [mainOrderId]: {
                     ...prevItems[mainOrderId],
-                    items: itemsForTable,
+                    menuItems: itemsForTable,
                     ...updatedTableInfo
                 }
             };
@@ -75,9 +74,10 @@ export const CartProvider = ({ children }) => {
     };
 
     const getSubOrderInfo = (mainOrderId) => {
-        return SubOrderInfo[mainOrderId] || {};
+        console.log(SubOrderInfo)
+        console.log(SubOrderInfo[mainOrderId])
+        return SubOrderInfo[mainOrderId] || { items: [], total: 0 };
     };
-
 
     return (
         <CartContext.Provider value={{ SubOrderInfo, addToCart, getSubOrderInfo }}>
