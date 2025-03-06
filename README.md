@@ -1,6 +1,6 @@
 # 點餐POS系統後端
 
-提供顧客線上點餐，本項目包含後台點餐POS系統。
+提供顧客線上點餐，本項目包含後台點餐POS系統前端。
 
 ## 功能特點
 
@@ -10,14 +10,12 @@
 ## 技術棧
 
 - 前端：React, Bootstrap, SCSS
-- 後端：Node.js, Express
-- 數據庫：MySQL
 
 ## 安裝指南
 
 # 克隆項目
 ```bash
-git clone https://github.com/jj2016025j/FANGS-FOOD-POS-System.git
+git clone https://github.com/jj2016025j/POS-UI.git
 ```
 
 # 建立.env檔案 並貼上以下內容
@@ -46,7 +44,7 @@ yarn start
 - **網站訪問**：
 點擊以下連結或等待react自動開啟網頁
 ```bash
-pos系統: http://localhost:3000
+pos系統前端: http://localhost:3000
 ```
 
 ## **貢獻指南**
